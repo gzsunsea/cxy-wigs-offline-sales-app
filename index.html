@@ -1,0 +1,2180 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CXY Wigs Offline Sales App</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #2c2c2c;
+      --muted: #666666;
+      --soft: #faf8f5;
+      --line: #e8e5e1;
+      --panel: #faf8f5;
+      --card: #ffffff;
+      --accent: #c67c5c;
+      --accent-dark: #a67254;
+      --blue: #1890ff;
+      --gold: #d4af6a;
+      --rose: #f5222d;
+      --rose-gold: #b8856a;
+      --success: #52c41a;
+      --warn: #faad14;
+      --shadow: 0 2px 8px rgba(198, 124, 92, .08);
+      --shadow-strong: 0 8px 24px rgba(198, 124, 92, .16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.45;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      min-height: 40px;
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 8px 13px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    button.secondary {
+      background: #fff;
+      color: var(--accent-dark);
+    }
+
+    button.warning {
+      border-color: #dfc08c;
+      background: #fff;
+      color: #865414;
+    }
+
+    button.danger {
+      border-color: #d8b6bd;
+      background: #fff;
+      color: var(--rose);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 9px 10px;
+      background: #f5f3f0;
+      color: var(--ink);
+    }
+
+    textarea {
+      min-height: 84px;
+      resize: vertical;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 780;
+      color: var(--muted);
+    }
+
+    label span {
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 760;
+    }
+
+    .zh-secondary {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: .78em;
+      font-weight: 620;
+      line-height: 1.35;
+    }
+
+    .intro-panel .zh-secondary,
+    .pitch-item .zh-secondary {
+      color: rgba(255, 255, 255, .84);
+    }
+
+    .nav .zh-secondary {
+      margin-top: 1px;
+      font-size: 11px;
+      font-weight: 620;
+    }
+
+    label .zh-secondary {
+      margin-top: 1px;
+      font-size: 11px;
+      font-weight: 620;
+    }
+
+    header {
+      padding: 24px 26px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    .topbar {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      display: block;
+      width: 156px;
+      height: 78px;
+      object-fit: contain;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: 0;
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav button {
+      min-height: 36px;
+      border-color: transparent;
+      background: transparent;
+      color: var(--muted);
+      padding: 7px 10px;
+    }
+
+    .nav button.active {
+      border-color: var(--accent);
+      background: #fff;
+      color: var(--accent-dark);
+      box-shadow: 0 6px 18px rgba(13, 107, 87, .12);
+    }
+
+    .user-bar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .login-panel {
+      display: grid;
+      gap: 14px;
+      max-width: 520px;
+      margin: 24px auto 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 22px 26px 42px;
+    }
+
+    .screen { display: none; }
+    .screen.active {
+      display: grid;
+      gap: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 14px;
+      align-items: end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0; }
+
+    .muted { color: var(--muted); }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-band {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items: stretch;
+      min-height: 260px;
+    }
+
+    .intro-panel, .privacy-panel, .report-panel, .profile-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 18px;
+    }
+
+    .intro-panel {
+      display: grid;
+      align-content: center;
+      gap: 16px;
+      background:
+        linear-gradient(120deg, rgba(198, 124, 92, .95), rgba(212, 175, 106, .82)),
+        radial-gradient(circle at 70% 30%, rgba(255, 255, 255, .38), transparent 32%),
+        #c67c5c;
+      color: #fff;
+    }
+
+    .intro-panel .muted { color: rgba(255, 255, 255, .82); }
+
+    .intro-panel h2 { font-size: 31px; }
+
+    .pitch-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .pitch-item {
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .pitch-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .privacy-panel {
+      display: grid;
+      gap: 12px;
+      background: #fffaf2;
+      border-color: #ead4ad;
+    }
+
+    .privacy-panel strong { color: #784910; }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .product-card, .customer-card, .metric, .report-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .product-card {
+      display: grid;
+      gap: 12px;
+      padding: 15px;
+    }
+
+    .product-media {
+      display: grid;
+      min-height: 190px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(198, 124, 92, .92), rgba(184, 133, 106, .86)),
+        #c67c5c;
+    }
+
+    .product-media img,
+    .product-media video {
+      width: 100%;
+      height: 100%;
+      min-height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-placeholder {
+      display: grid;
+      place-items: center;
+      min-height: 190px;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+      font-weight: 820;
+    }
+
+    .media-strip {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .media-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border: 1px solid #c8d7ef;
+      border-radius: 6px;
+      padding: 4px 8px;
+      color: var(--blue);
+      background: #f4f8ff;
+      font-size: 12px;
+      font-weight: 760;
+      text-decoration: none;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border: 1px solid #c8d8d1;
+      border-radius: 999px;
+      padding: 3px 8px;
+      color: #32443d;
+      background: #f7fbf9;
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .tag.blue {
+      border-color: #c8d7ef;
+      background: #f4f8ff;
+      color: #173553;
+    }
+
+    .tag.gold {
+      border-color: #ecd2a4;
+      background: #fff7e8;
+      color: #734b14;
+    }
+
+    .price {
+      color: var(--accent-dark);
+      font-size: 20px;
+      font-weight: 840;
+    }
+
+    .product-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      align-items: start;
+    }
+
+    .span-2 { grid-column: span 2; }
+    .span-4 { grid-column: span 4; }
+
+    .form-panel {
+      display: grid;
+      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: var(--panel);
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .check {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .check input {
+      width: auto;
+      min-height: auto;
+      margin: 0;
+    }
+
+    .profile-panel {
+      display: grid;
+      gap: 12px;
+      background: #f7fbff;
+      border-color: #c8d7ef;
+    }
+
+    .profile-title {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .score {
+      display: inline-grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 860;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .profile-chip {
+      min-height: 70px;
+      border: 1px solid #c8d7ef;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .profile-chip span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .profile-chip strong {
+      display: block;
+      margin-top: 4px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, minmax(150px, .55fr));
+      gap: 10px;
+      align-items: end;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--panel);
+    }
+
+    .customer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .customer-card {
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .customer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .customer-top strong {
+      font-size: 17px;
+    }
+
+    .mini {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .mini span {
+      display: block;
+      color: var(--ink);
+      font-weight: 760;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 14px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 780;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 25px;
+      letter-spacing: 0;
+    }
+
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .admin-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .admin-product {
+      display: grid;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .report-card {
+      padding: 15px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bars {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(90px, .7fr) 1fr 42px;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #edf2ef;
+      overflow: hidden;
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--accent);
+    }
+
+    .empty {
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      color: var(--muted);
+      background: #fff;
+    }
+
+    .status {
+      min-height: 22px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 740;
+    }
+
+    .poster-preview {
+      max-width: 390px;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 980px) {
+      header { padding: 18px 18px 12px; }
+      main { padding: 18px 18px 96px; }
+      .topbar { align-items: start; flex-direction: column; }
+      .nav { width: 100%; justify-content: start; }
+      .hero-band, .product-grid, .customer-grid, .report-grid, .admin-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .span-4 { grid-column: span 2; }
+      .checkbox-grid, .metrics, .profile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 20px; }
+      .intro-panel h2 { font-size: 24px; }
+      .brand-logo { width: 118px; height: 58px; }
+      .nav {
+        position: fixed;
+        z-index: 4;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0;
+        border-top: 1px solid var(--line);
+        background: #fff;
+      }
+      .nav button {
+        min-height: 58px;
+        border-radius: 0;
+        padding: 6px 4px;
+        font-size: 11px;
+        white-space: normal;
+      }
+      .nav button.active {
+        border-color: transparent;
+        border-top: 3px solid var(--accent);
+        box-shadow: none;
+      }
+      .pitch-list, .form-grid, .checkbox-grid, .metrics, .profile-grid, .toolbar, .mini {
+        grid-template-columns: 1fr;
+      }
+      .span-2, .span-4 { grid-column: span 1; }
+      .section-head { align-items: start; }
+      .actions button { flex: 1 1 130px; }
+      .bar-row { grid-template-columns: 82px 1fr 34px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <img class="brand-logo" src="media/brand/cxy-wigs-logo-horizontal.png" alt="CXY Wigs">
+        <div>
+          <h1>CXY Wigs Offline Sales App</h1>
+          <p class="subtitle">线下客户咨询、画像海报和导出报表工具</p>
+        </div>
+      </div>
+      <nav class="nav" aria-label="主导航">
+        <button class="active" data-screen="products">Products<span class="zh-secondary">商品</span></button>
+        <button data-screen="newCustomer">New<span class="zh-secondary">新增</span></button>
+        <button data-screen="customers">Clients<span class="zh-secondary">客户</span></button>
+        <button data-screen="reports">Reports<span class="zh-secondary">报表</span></button>
+        <button data-screen="admin" data-role-only="admin">Admin<span class="zh-secondary">后台</span></button>
+        <button data-screen="exports">Export<span class="zh-secondary">导出</span></button>
+      </nav>
+      <div class="user-bar">
+        <span id="sessionLabel">Local sales demo</span>
+        <button class="secondary" id="loginToggleBtn">Sign In</button>
+        <button class="secondary hidden" id="logoutBtn">Sign Out</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="loginPanel" class="login-panel hidden">
+      <div>
+        <h2>Sign In<span class="zh-secondary">登录</span></h2>
+        <p class="muted">Sales reps only see their own clients. Admins can manage products and see team reports.</p>
+      </div>
+      <label><span>Email<span class="zh-secondary">邮箱</span></span><input id="loginEmail" autocomplete="email" placeholder="sales@example.com"></label>
+      <label><span>Password<span class="zh-secondary">密码</span></span><input id="loginPassword" type="password" autocomplete="current-password"></label>
+      <div class="actions">
+        <button id="signInBtn">Sign In</button>
+        <button class="secondary" id="useDemoSalesBtn">Use Sales Demo</button>
+        <button class="secondary" id="useDemoAdminBtn">Use Admin Demo</button>
+      </div>
+      <div id="loginStatus" class="status"></div>
+    </section>
+
+    <section id="products" class="screen active">
+      <div class="hero-band">
+        <div class="intro-panel">
+          <div>
+            <h2>Start with the customer's need, then match the wig.</h2>
+            <p class="zh-secondary">面对面介绍假发时，先讲需求，再讲产品。</p>
+            <p class="muted">Match wig type, comfort level, budget, and follow-up action in one clear conversation.</p>
+          </div>
+          <div class="pitch-list">
+            <div class="pitch-item">
+              <strong>Natural look</strong>
+              <p>Explain how lace, hairline, color, and density affect realism.</p>
+              <span class="zh-secondary">重点解释 lace、发际线、颜色和密度如何影响真实感。</span>
+            </div>
+            <div class="pitch-item">
+              <strong>Comfort</strong>
+              <p>Compare glueless, headband, cap construction, and long-wear comfort.</p>
+              <span class="zh-secondary">区分无胶、发带、帽底结构和是否适合长时间佩戴。</span>
+            </div>
+            <div class="pitch-item">
+              <strong>Budget</strong>
+              <p>Confirm the price range before recommending human hair, synthetic, or starter options.</p>
+              <span class="zh-secondary">先确认预算，再推荐真人发、化纤或入门款。</span>
+            </div>
+            <div class="pitch-item">
+              <strong>Follow-up</strong>
+              <p>Record key concerns and generate a profile plus next step on-site.</p>
+              <span class="zh-secondary">记录客户关注点，现场生成画像和下一步建议。</span>
+            </div>
+          </div>
+        </div>
+        <div class="privacy-panel">
+          <h3>Privacy Reminder<span class="zh-secondary">敏感信息记录提醒</span></h3>
+          <p>This app can store sensitive fields such as address, hair-loss details, and medical notes. Collect only with consent and protect exported files.</p>
+          <p class="muted">本 APP 可记录地址、脱发原因、医疗相关备注等敏感字段。请只记录客户明确同意提供的信息，并在导出文件时妥善保存。</p>
+          <div class="tag-row">
+            <span class="tag gold">Local only / 本地保存</span>
+            <span class="tag blue">CSV/JSON export / 可导出</span>
+            <span class="tag">Poster PNG / 海报</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <div>
+          <h2>Product Cards<span class="zh-secondary">推荐展示卡</span></h2>
+          <p class="muted">Based on the current Dilisi 2026-05-28 pricing table. 基于当前仓库定价表整理，适合第一版线下介绍。</p>
+        </div>
+      </div>
+      <div id="productGrid" class="product-grid"></div>
+    </section>
+
+    <section id="newCustomer" class="screen">
+      <div class="section-head">
+        <div>
+          <h2>New Client<span class="zh-secondary">新增客户</span></h2>
+          <p class="muted">The more complete the form, the better the profile and follow-up suggestion. 填写越完整，画像和跟进建议越准确。</p>
+        </div>
+        <div class="actions">
+          <button class="secondary" id="resetFormBtn">Reset Form</button>
+          <button id="saveCustomerBtn">Save Client</button>
+        </div>
+      </div>
+
+      <form id="customerForm" class="form-panel">
+        <input type="hidden" id="customerId">
+        <div class="form-grid">
+          <label><span>Name<span class="zh-secondary">姓名/昵称</span></span><input id="name" autocomplete="name" placeholder="Lisa / Ms. Wang"></label>
+          <label><span>Phone<span class="zh-secondary">电话</span></span><input id="phone" autocomplete="tel" placeholder="+1 ..."></label>
+          <label><span>Email<span class="zh-secondary">邮箱</span></span><input id="email" autocomplete="email" placeholder="name@example.com"></label>
+          <label><span>City<span class="zh-secondary">城市</span></span><input id="city" placeholder="Calgary"></label>
+
+          <label><span>Age Range<span class="zh-secondary">年龄段</span></span><select id="ageRange"></select></label>
+          <label><span>Pronoun / Gender<span class="zh-secondary">称呼/性别</span></span><select id="gender"></select></label>
+          <label><span>Budget<span class="zh-secondary">预算</span></span><select id="budget"></select></label>
+          <label><span>Status<span class="zh-secondary">跟进状态</span></span><select id="followStatus"></select></label>
+
+          <label><span>Purpose<span class="zh-secondary">购买目的</span></span><select id="purpose"></select></label>
+          <label><span>Experience<span class="zh-secondary">佩戴经验</span></span><select id="experience"></select></label>
+          <label><span>Preferred Length<span class="zh-secondary">偏好长度</span></span><select id="lengthPreference"></select></label>
+          <label><span>Preferred Hair Type<span class="zh-secondary">偏好发材</span></span><select id="hairTypePreference"></select></label>
+
+          <label><span>Preferred Color<span class="zh-secondary">偏好颜色</span></span><input id="colorPreference" placeholder="Natural black / dark brown"></label>
+          <label><span>Recommended SKU<span class="zh-secondary">推荐 SKU</span></span><select id="recommendedSku"></select></label>
+          <label class="span-2"><span>Address<span class="zh-secondary">地址</span></span><input id="address" autocomplete="street-address" placeholder="Sensitive / optional"></label>
+
+          <label class="span-2"><span>Hair-loss or Medical Reason<span class="zh-secondary">脱发/医疗原因</span></span><textarea id="sensitiveReason" placeholder="Sensitive / optional. Chemotherapy, alopecia, thinning hair..."></textarea></label>
+          <label class="span-2"><span>Fitting / Cap / Sensitivity Notes<span class="zh-secondary">试戴/头围/皮肤敏感</span></span><textarea id="fittingNotes" placeholder="Cap size, scalp sensitivity, fitting notes..."></textarea></label>
+          <label class="span-4"><span>General Notes<span class="zh-secondary">备注</span></span><textarea id="notes" placeholder="Customer concerns, promise made, next appointment..."></textarea></label>
+        </div>
+
+        <div>
+          <h3>Key Concerns<span class="zh-secondary">客户关注点</span></h3>
+          <div id="concernChecks" class="checkbox-grid"></div>
+        </div>
+
+        <label class="check">
+          <input id="consent" type="checkbox">
+          Client consent received for collecting this information / 已获得客户同意记录这些信息
+        </label>
+        <div id="formStatus" class="status"></div>
+      </form>
+
+      <div id="profilePreview" class="profile-panel"></div>
+    </section>
+
+    <section id="customers" class="screen">
+      <div class="section-head">
+        <div>
+          <h2>Client List<span class="zh-secondary">客户列表</span></h2>
+          <p class="muted">Search, edit, download profile posters, or filter by status. 搜索、编辑、下载画像海报，或按状态筛选客户。</p>
+        </div>
+        <div class="actions">
+          <button class="secondary" data-screen-jump="newCustomer">New Client</button>
+        </div>
+      </div>
+      <div class="toolbar">
+        <label><span>Search<span class="zh-secondary">搜索</span></span><input id="searchInput" placeholder="Name, city, phone, profile..."></label>
+        <label><span>Status<span class="zh-secondary">状态</span></span><select id="filterStatus"></select></label>
+        <label><span>Profile<span class="zh-secondary">画像</span></span><select id="filterProfile"></select></label>
+        <label><span>Budget<span class="zh-secondary">预算</span></span><select id="filterBudget"></select></label>
+      </div>
+      <div id="customerList" class="customer-grid"></div>
+    </section>
+
+    <section id="reports" class="screen">
+      <div class="section-head">
+        <div>
+          <h2>Reports<span class="zh-secondary">统计报表</span></h2>
+          <p class="muted">Review offline promotion results: source, budget, profile, status, and high-intent clients. 用于复盘线下推广成果。</p>
+        </div>
+        <div class="actions">
+          <button id="exportReportCsvBtn">Export Report CSV</button>
+        </div>
+      </div>
+      <div id="metrics" class="metrics"></div>
+      <div id="reportGrid" class="report-grid"></div>
+    </section>
+
+    <section id="exports" class="screen">
+      <div class="section-head">
+        <div>
+          <h2>Export & Maintenance<span class="zh-secondary">导出与维护</span></h2>
+          <p class="muted">CSV can be opened in Excel; JSON is useful for backup or later system import. CSV 可用 Excel 打开。</p>
+        </div>
+      </div>
+      <div class="report-panel">
+        <div class="actions">
+          <button id="exportCustomersCsvBtn">Export Clients CSV</button>
+          <button class="secondary" id="exportCustomersJsonBtn">Export Clients JSON</button>
+          <button class="secondary" id="exportReportJsonBtn">Export Report JSON</button>
+          <button class="danger" id="clearAllBtn">Clear Local Data</button>
+        </div>
+        <p class="muted">Exported files may include sensitive information. Keep them private and delete stale copies.</p>
+        <div id="exportStatus" class="status"></div>
+      </div>
+      <canvas id="posterCanvas" width="1200" height="1600" class="hidden"></canvas>
+    </section>
+
+    <section id="admin" class="screen">
+      <div class="section-head">
+        <div>
+          <h2>Admin<span class="zh-secondary">商品后台</span></h2>
+          <p class="muted">Manage products locally or sync them to Supabase after cloud config is filled. 填好云配置后可同步商品到 Supabase。</p>
+        </div>
+        <div class="actions">
+          <button class="secondary" id="reloadCloudBtn">Reload Cloud</button>
+          <button id="newProductBtn">New Product</button>
+        </div>
+      </div>
+
+      <div class="privacy-panel">
+        <h3>Cloud Status<span class="zh-secondary">云端状态</span></h3>
+        <p id="cloudStatus">Checking configuration...</p>
+        <p class="muted">GitHub Pages hosts the front end only. Supabase stores products, clients, images, and videos.</p>
+      </div>
+
+      <div class="admin-grid">
+        <form id="productForm" class="form-panel">
+          <input type="hidden" id="productId">
+          <div class="form-grid">
+            <label><span>SKU<span class="zh-secondary">商品编号</span></span><input id="productSku" placeholder="DILISI-20260528-001"></label>
+            <label><span>Sort Order<span class="zh-secondary">排序</span></span><input id="productSort" type="number" min="0" step="1" placeholder="10"></label>
+            <label class="span-2"><span>English Name<span class="zh-secondary">英文名称</span></span><input id="productNameEn" placeholder="13x4 HD 250% Bob Wig"></label>
+            <label class="span-2"><span>Chinese Name<span class="zh-secondary">中文名称</span></span><input id="productNameZh" placeholder="13x4 HD 250% Bob"></label>
+            <label><span>Type<span class="zh-secondary">类型</span></span><input id="productType" placeholder="Human hair / 真人发"></label>
+            <label><span>Length<span class="zh-secondary">长度</span></span><input id="productInch" placeholder="12 inch"></label>
+            <label><span>Style<span class="zh-secondary">发型</span></span><input id="productStyle" placeholder="st 1b bob"></label>
+            <label><span>Price<span class="zh-secondary">价格</span></span><input id="productPrice" placeholder="C$349-399 Calgary"></label>
+            <label class="span-2"><span>Tags<span class="zh-secondary">标签，逗号分隔</span></span><input id="productTags" placeholder="HD lace, 250% density, Premium"></label>
+            <label class="span-2"><span>Cover Image URL<span class="zh-secondary">主图 URL</span></span><input id="productCover" placeholder="https://... or media/products/.../cover.jpg"></label>
+            <label class="span-2"><span>Image URLs<span class="zh-secondary">图片 URL，每行一个</span></span><textarea id="productImages" placeholder="https://..."></textarea></label>
+            <label class="span-2"><span>Video URLs<span class="zh-secondary">视频 URL，每行一个</span></span><textarea id="productVideos" placeholder="https://...demo.mp4"></textarea></label>
+            <label class="span-2"><span>Fit English<span class="zh-secondary">英文适合人群</span></span><textarea id="productFitEn"></textarea></label>
+            <label class="span-2"><span>Fit Chinese<span class="zh-secondary">中文适合人群</span></span><textarea id="productFitZh"></textarea></label>
+            <label class="span-2"><span>Talk English<span class="zh-secondary">英文销售话术</span></span><textarea id="productTalkEn"></textarea></label>
+            <label class="span-2"><span>Talk Chinese<span class="zh-secondary">中文销售话术</span></span><textarea id="productTalkZh"></textarea></label>
+          </div>
+          <div class="actions">
+            <button id="saveProductBtn" type="button">Save Product</button>
+            <button class="secondary" id="exportProductsBtn" type="button">Export Products JSON</button>
+          </div>
+          <div id="productAdminStatus" class="status"></div>
+        </form>
+        <div class="report-panel">
+          <h3>Product List<span class="zh-secondary">商品列表</span></h3>
+          <div id="adminProductList" class="admin-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script>
+    const STORAGE_KEY = "cxy_offline_sales_clients_v1";
+    const PRODUCT_STORAGE_KEY = "cxy_offline_sales_products_v1";
+    const SYNC_QUEUE_KEY = "cxy_offline_sales_sync_queue_v1";
+    const SESSION_KEY = "cxy_offline_sales_session_v1";
+    const cloudConfig = window.CXY_APP_CONFIG || {};
+
+    const defaultProducts = [
+      {
+        sku: "DILISI-20260528-001",
+        zh: "13x4 HD 250% Bob",
+        en: "13x4 HD 250% Bob Wig",
+        type: "Human hair / 真人发",
+        inch: "12 inch",
+        style: "st 1b bob",
+        price: "C$349-399 Calgary",
+        fit: "适合追求自然发际线、短发通勤和高品质入门客户。",
+        fitEn: "Best for natural hairline, everyday bob styling, and premium first try.",
+        talk: "HD lace 和 250% 密度更适合想要自然但有发量的客户。",
+        talkEn: "HD lace and 250% density work well for clients who want a natural but full look.",
+        tags: ["HD lace", "250% density", "Premium"]
+      },
+      {
+        sku: "DILISI-20260528-003",
+        zh: "2x4 Bob 10A",
+        en: "2x4 10A Bob Wig",
+        type: "Human hair / 真人发",
+        inch: "10-12 inch",
+        style: "st 1b / #1b30",
+        price: "C$119-199 Calgary",
+        fit: "适合预算中等、想要易打理短发的首次购买者。",
+        fitEn: "Good for mid-budget first-time buyers who want an easy bob.",
+        talk: "结构更简单，价格更友好，适合先体验真人发质感。",
+        talkEn: "A simpler structure and friendlier price make it a good first human-hair experience.",
+        tags: ["Starter", "Bob", "Value"]
+      },
+      {
+        sku: "DILISI-20260528-007",
+        zh: "180% Headband Wig",
+        en: "180% Headband Wig",
+        type: "Human hair / 真人发",
+        inch: "22 inch",
+        style: "kc / kkst",
+        price: "C$299-349 Calgary",
+        fit: "适合重视佩戴速度、舒适度和日常自然造型的客户。",
+        fitEn: "Best for quick wear, comfort, and casual everyday looks.",
+        talk: "发带款不用处理 lace，上手快，适合忙碌客户。",
+        talkEn: "The headband design avoids lace work and is easy for busy clients to wear.",
+        tags: ["Glueless", "Comfort", "Daily"]
+      },
+      {
+        sku: "DILISI-20260528-009",
+        zh: "13x4 180% Glueless Wig",
+        en: "13x4 180% Glueless Wig",
+        type: "Human hair / 真人发",
+        inch: "22 inch",
+        style: "body wave",
+        price: "C$349-399 Calgary",
+        fit: "适合想要长发、自然 lace、无胶佩戴体验的客户。",
+        fitEn: "Best for long-hair clients who want lace-front natural styling.",
+        talk: "13x4 lace 可做更多分缝和发际线造型，180% 密度更日常。",
+        talkEn: "13x4 lace supports more parting and hairline styling, while 180% density stays practical.",
+        tags: ["13x4", "Glueless", "Body wave"]
+      },
+      {
+        sku: "DILISI-20260528-010",
+        zh: "Synthetic Headband Wig",
+        en: "Synthetic Headband Wig",
+        type: "Synthetic / 化纤",
+        inch: "24 inch",
+        style: "kc / kkst",
+        price: "C$59-89 Calgary",
+        fit: "适合预算敏感、派对造型或想先试戴的新客户。",
+        fitEn: "Best for budget-conscious clients, events, or first try-ons.",
+        talk: "价格低、造型感强，但耐用度和自然度要提前说明。",
+        talkEn: "Lower cost and strong styling impact, with clear expectations on durability and realism.",
+        tags: ["Budget", "Try-on", "Synthetic"]
+      },
+      {
+        sku: "DILISI-20260528-013",
+        zh: "假发支架",
+        en: "Wig Stand",
+        type: "Accessory / 配件",
+        inch: "One size",
+        style: "stand",
+        price: "C$5-10",
+        fit: "适合搭配所有假发，帮助客户存放、晾干和护理。",
+        fitEn: "Useful add-on for storage, drying, and daily wig care.",
+        talk: "推荐作为基础护理配件，提高复购和使用体验。",
+        talkEn: "A basic care add-on that improves storage, drying, and everyday use.",
+        tags: ["Care", "Add-on", "Accessory"]
+      }
+    ];
+
+    let products = loadLocalProducts();
+
+    const optionSets = {
+      ageRange: ["", "Under 25", "25-34", "35-44", "45-54", "55+"],
+      gender: ["", "Female / 女士", "Male / 男士", "Non-binary / 非二元", "Prefer not to say / 不透露"],
+      budget: ["", "Under C$100", "C$100-199", "C$200-349", "C$350-499", "C$500+"],
+      followStatus: ["New / 新客户", "Tried on / 已试戴", "Quoted / 已报价", "High intent / 高意向", "Purchased / 已成交", "Follow-up / 需回访", "Not now / 暂不购买"],
+      purpose: ["", "Daily look / 日常通勤", "Hair loss coverage / 脱发遮盖", "Medical treatment / 医疗治疗", "Fashion change / 造型变化", "Event or party / 活动派对", "Gift / 礼物"],
+      experience: ["", "First time / 第一次", "Some experience / 有经验", "Frequent wearer / 经常佩戴"],
+      lengthPreference: ["", "Short / 短发", "Medium / 中长", "Long / 长发", "Not sure / 不确定"],
+      hairTypePreference: ["", "Human hair / 真人发", "Synthetic / 化纤", "Mixed / 混合", "Not sure / 不确定"]
+    };
+
+    const concerns = [
+      "Natural look / 自然",
+      "Price / 价格",
+      "Comfort / 舒适",
+      "Durability / 耐用",
+      "Easy care / 易打理",
+      "Breathable cap / 透气",
+      "Hair volume / 发量",
+      "Fast fitting / 快速佩戴"
+    ];
+
+    const fields = [
+      "id", "createdAt", "updatedAt", "name", "phone", "email", "city", "ageRange", "gender", "budget",
+      "followStatus", "purpose", "experience", "lengthPreference", "hairTypePreference", "colorPreference",
+      "recommendedSku", "address", "sensitiveReason", "fittingNotes", "notes", "concerns", "consent",
+      "profileType", "profileTypeEn", "score", "priority", "recommendation", "recommendationEn", "nextStep", "nextStepEn"
+    ];
+
+    let currentSession = loadSession();
+    let customers = loadCustomers();
+    let currentProfile = null;
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+    function demoSession(role = "sales") {
+      return {
+        id: role === "admin" ? "demo-admin" : "demo-sales",
+        email: role === "admin" ? "admin@cxywigs.local" : "sales@cxywigs.local",
+        name: role === "admin" ? "CXY Admin" : "Sales Demo",
+        role,
+        token: "",
+        demo: true
+      };
+    }
+
+    function loadSession() {
+      try {
+        return JSON.parse(localStorage.getItem(SESSION_KEY) || "null") || demoSession("sales");
+      } catch {
+        return demoSession("sales");
+      }
+    }
+
+    function saveSession(session) {
+      currentSession = session;
+      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      customers = loadCustomers();
+      applyRoleVisibility();
+      renderAll();
+    }
+
+    function userStorageKey(baseKey) {
+      return `${baseKey}_${currentSession?.id || "anonymous"}`;
+    }
+
+    function loadCustomers() {
+      try {
+        return JSON.parse(localStorage.getItem(userStorageKey(STORAGE_KEY)) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCustomers() {
+      localStorage.setItem(userStorageKey(STORAGE_KEY), JSON.stringify(customers));
+    }
+
+    function loadLocalProducts() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(PRODUCT_STORAGE_KEY) || "[]");
+        return saved.length ? saved.map(normalizeProduct) : defaultProducts.map(normalizeProduct);
+      } catch {
+        return defaultProducts.map(normalizeProduct);
+      }
+    }
+
+    function saveLocalProducts() {
+      localStorage.setItem(PRODUCT_STORAGE_KEY, JSON.stringify(products));
+    }
+
+    function normalizeList(value) {
+      if (Array.isArray(value)) return value.filter(Boolean);
+      if (!value) return [];
+      return String(value).split(/\n|,/).map((item) => item.trim()).filter(Boolean);
+    }
+
+    function normalizeProduct(product = {}) {
+      return {
+        id: product.id || product.sku || `product-${Date.now()}`,
+        sku: product.sku || "",
+        en: product.en || product.name_en || product.nameEn || "",
+        zh: product.zh || product.name_zh || product.nameZh || "",
+        type: product.type || "",
+        inch: product.inch || product.length || "",
+        style: product.style || "",
+        price: product.price || "",
+        fit: product.fit || product.fit_zh || product.fitZh || "",
+        fitEn: product.fitEn || product.fit_en || product.fitEnglish || "",
+        talk: product.talk || product.talk_zh || product.talkZh || "",
+        talkEn: product.talkEn || product.talk_en || product.talkEnglish || "",
+        cover: product.cover || product.cover_url || product.coverUrl || "",
+        images: normalizeList(product.images || product.image_urls || product.imageUrls),
+        videos: normalizeList(product.videos || product.video_urls || product.videoUrls),
+        tags: normalizeList(product.tags),
+        sortOrder: Number(product.sortOrder ?? product.sort_order ?? 999)
+      };
+    }
+
+    function productPayload(product) {
+      const normalized = normalizeProduct(product);
+      return {
+        id: normalized.id,
+        sku: normalized.sku,
+        name_en: normalized.en,
+        name_zh: normalized.zh,
+        type: normalized.type,
+        inch: normalized.inch,
+        style: normalized.style,
+        price: normalized.price,
+        fit_en: normalized.fitEn,
+        fit_zh: normalized.fit,
+        talk_en: normalized.talkEn,
+        talk_zh: normalized.talk,
+        cover_url: normalized.cover,
+        image_urls: normalized.images,
+        video_urls: normalized.videos,
+        tags: normalized.tags,
+        sort_order: normalized.sortOrder,
+        updated_at: new Date().toISOString()
+      };
+    }
+
+    function cloudEnabled() {
+      return Boolean(cloudConfig.supabaseUrl && cloudConfig.supabaseAnonKey);
+    }
+
+    function cloudHeaders(extra = {}) {
+      const token = currentSession?.token || cloudConfig.supabaseAnonKey;
+      return {
+        apikey: cloudConfig.supabaseAnonKey,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        ...extra
+      };
+    }
+
+    function cloudUrl(path) {
+      return `${String(cloudConfig.supabaseUrl || "").replace(/\/$/, "")}${path}`;
+    }
+
+    async function cloudRequest(path, options = {}) {
+      if (!cloudEnabled()) throw new Error("Supabase is not configured.");
+      const response = await fetch(cloudUrl(path), {
+        ...options,
+        headers: cloudHeaders(options.headers || {})
+      });
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(detail || `Cloud request failed: ${response.status}`);
+      }
+      if (response.status === 204) return null;
+      return response.json();
+    }
+
+    async function loadCloudProducts() {
+      if (!cloudEnabled()) return false;
+      const rows = await cloudRequest("/rest/v1/products?select=*&order=sort_order.asc,name_en.asc");
+      products = rows.map(normalizeProduct);
+      saveLocalProducts();
+      return true;
+    }
+
+    async function saveCloudProduct(product) {
+      if (!cloudEnabled()) return false;
+      await cloudRequest("/rest/v1/products?on_conflict=id", {
+        method: "POST",
+        headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
+        body: JSON.stringify(productPayload(product))
+      });
+      return true;
+    }
+
+    async function deleteCloudProduct(productId) {
+      if (!cloudEnabled()) return false;
+      await cloudRequest(`/rest/v1/products?id=eq.${encodeURIComponent(productId)}`, {
+        method: "DELETE"
+      });
+      return true;
+    }
+
+    async function saveCloudCustomer(customer) {
+      if (!cloudEnabled()) {
+        queueSync({ type: "customer", record: customer });
+        return false;
+      }
+      await cloudRequest("/rest/v1/clients?on_conflict=id", {
+        method: "POST",
+        headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
+        body: JSON.stringify({
+          id: customer.id,
+          owner_id: currentSession.id,
+          name: customer.name,
+          phone: customer.phone,
+          email: customer.email,
+          city: customer.city,
+          profile_type: customer.profileType,
+          profile_type_en: customer.profileTypeEn,
+          score: customer.score,
+          follow_status: customer.followStatus,
+          recommended_sku: customer.recommendedSku,
+          payload: customer,
+          consent: customer.consent,
+          created_at: customer.createdAt,
+          updated_at: customer.updatedAt
+        })
+      });
+      return true;
+    }
+
+    async function signInWithPassword(email, password) {
+      if (!cloudEnabled()) throw new Error("Supabase is not configured. Use a demo role or add config.js.");
+      const response = await fetch(cloudUrl("/auth/v1/token?grant_type=password"), {
+        method: "POST",
+        headers: cloudHeaders({ Authorization: `Bearer ${cloudConfig.supabaseAnonKey}` }),
+        body: JSON.stringify({ email, password })
+      });
+      if (!response.ok) throw new Error(await response.text());
+      const auth = await response.json();
+      const profile = await fetchProfile(auth.user.id, auth.access_token);
+      saveSession({
+        id: auth.user.id,
+        email: auth.user.email,
+        name: profile?.full_name || auth.user.email,
+        role: profile?.role || "sales",
+        token: auth.access_token,
+        demo: false
+      });
+      await loadCloudProducts().catch(() => false);
+      await loadCloudCustomers().catch(() => false);
+      await flushSyncQueue().catch(() => 0);
+      renderAll();
+    }
+
+    async function fetchProfile(userId, token) {
+      const response = await fetch(cloudUrl(`/rest/v1/profiles?id=eq.${encodeURIComponent(userId)}&select=*&limit=1`), {
+        headers: {
+          apikey: cloudConfig.supabaseAnonKey,
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      });
+      if (!response.ok) return null;
+      const rows = await response.json();
+      return rows[0] || null;
+    }
+
+    async function loadCloudCustomers() {
+      if (!cloudEnabled()) return false;
+      const path = currentSession.role === "admin"
+        ? "/rest/v1/clients?select=*&order=created_at.desc"
+        : `/rest/v1/clients?select=*&owner_id=eq.${encodeURIComponent(currentSession.id)}&order=created_at.desc`;
+      const rows = await cloudRequest(path);
+      customers = rows.map((row) => row.payload || row);
+      saveCustomers();
+      return true;
+    }
+
+    function queueSync(item) {
+      try {
+        const queue = JSON.parse(localStorage.getItem(SYNC_QUEUE_KEY) || "[]");
+        queue.push({ ...item, queuedAt: new Date().toISOString() });
+        localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify(queue));
+      } catch {
+        localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify([item]));
+      }
+    }
+
+    async function flushSyncQueue() {
+      if (!cloudEnabled()) return 0;
+      const queue = JSON.parse(localStorage.getItem(SYNC_QUEUE_KEY) || "[]");
+      const remaining = [];
+      let synced = 0;
+      for (const item of queue) {
+        try {
+          if (item.type === "customer") {
+            await saveCloudCustomer(item.record);
+            synced += 1;
+          }
+        } catch {
+          remaining.push(item);
+        }
+      }
+      localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify(remaining));
+      return synced;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function bilingual(value) {
+      const text = String(value || "");
+      if (!text.includes(" / ")) return { en: text, zh: "" };
+      const [en, ...rest] = text.split(" / ");
+      return { en, zh: rest.join(" / ") };
+    }
+
+    function bilingualInline(value) {
+      const parts = bilingual(value);
+      return `${escapeHtml(parts.en)}${parts.zh ? `<span class="zh-secondary">${escapeHtml(parts.zh)}</span>` : ""}`;
+    }
+
+    function populateSelect(id, options, firstLabel) {
+      const select = $("#" + id);
+      select.innerHTML = "";
+      if (firstLabel) {
+        select.appendChild(new Option(firstLabel, ""));
+      }
+      options.forEach((option) => {
+        if (option === "") {
+          select.appendChild(new Option("Select / 请选择", ""));
+        } else {
+          select.appendChild(new Option(option, option));
+        }
+      });
+    }
+
+    function initOptions() {
+      Object.entries(optionSets).forEach(([id, values]) => populateSelect(id, values));
+      const skuSelect = $("#recommendedSku");
+      skuSelect.innerHTML = '<option value="">Auto recommend / 自动推荐</option>';
+      products.forEach((product) => skuSelect.appendChild(new Option(`${product.sku} - ${product.en}`, product.sku)));
+
+      ["filterStatus", "filterBudget"].forEach((id) => {
+        const source = id === "filterStatus" ? optionSets.followStatus : optionSets.budget;
+        populateSelect(id, source.filter(Boolean), "All / 全部");
+      });
+
+      const profileFilter = $("#filterProfile");
+      profileFilter.innerHTML = '<option value="">All / 全部</option>';
+      ["Natural Daily / 自然日常型", "Medical Comfort / 医疗舒适型", "Budget Starter / 预算入门型", "Premium Human Hair / 高品质真人发型", "Style Explorer / 造型尝鲜型"].forEach((item) => {
+        profileFilter.appendChild(new Option(item, item));
+      });
+
+      $("#concernChecks").innerHTML = concerns.map((concern, index) => `
+        <label class="check"><input type="checkbox" name="concerns" value="${escapeHtml(concern)}" ${index < 2 ? "" : ""}>${escapeHtml(concern)}</label>
+      `).join("");
+    }
+
+    function renderProducts() {
+      $("#productGrid").innerHTML = products.map((product) => `
+        <article class="product-card">
+          <div class="product-media">
+            ${product.cover
+              ? `<img src="${escapeHtml(product.cover)}" alt="${escapeHtml(product.en)}">`
+              : `<div class="media-placeholder">CXY Wigs<span class="zh-secondary">Product media ready</span></div>`}
+          </div>
+          <div class="tag-row">
+            ${product.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
+          </div>
+          <div>
+            <h3>${escapeHtml(product.en)}<span class="zh-secondary">${escapeHtml(product.zh)}</span></h3>
+            <p class="muted">${escapeHtml(product.sku)}</p>
+          </div>
+          <div class="price">${escapeHtml(product.price)}</div>
+          <p><strong>${escapeHtml(product.type)}</strong> · ${escapeHtml(product.inch)} · ${escapeHtml(product.style)}</p>
+          <ul>
+            <li>${escapeHtml(product.fitEn)}</li>
+            <li><span class="zh-secondary">${escapeHtml(product.fit)}</span></li>
+            <li>${escapeHtml(product.talkEn)}</li>
+            <li><span class="zh-secondary">${escapeHtml(product.talk)}</span></li>
+          </ul>
+          <div class="media-strip">
+            ${(product.images || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Image ${index + 1}</a>`).join("")}
+            ${(product.videos || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Video ${index + 1}</a>`).join("")}
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function getFormData() {
+      const data = {};
+      fields.forEach((field) => {
+        if (["id", "createdAt", "updatedAt", "profileType", "profileTypeEn", "score", "priority", "recommendation", "recommendationEn", "nextStep", "nextStepEn"].includes(field)) return;
+        if (field === "concerns") {
+          data.concerns = $$('input[name="concerns"]:checked').map((input) => input.value);
+        } else if (field === "consent") {
+          data.consent = $("#consent").checked;
+        } else {
+          const input = $("#" + field);
+          if (input) data[field] = input.value.trim();
+        }
+      });
+      data.id = $("#customerId").value;
+      return data;
+    }
+
+    function setFormData(customer) {
+      $("#customerId").value = customer.id || "";
+      Object.keys(optionSets).forEach((id) => $("#" + id).value = customer[id] || (id === "followStatus" ? "New / 新客户" : ""));
+      ["name", "phone", "email", "city", "colorPreference", "recommendedSku", "address", "sensitiveReason", "fittingNotes", "notes"].forEach((id) => {
+        $("#" + id).value = customer[id] || "";
+      });
+      $("#consent").checked = Boolean(customer.consent);
+      $$('input[name="concerns"]').forEach((input) => {
+        input.checked = (customer.concerns || []).includes(input.value);
+      });
+      updateProfilePreview();
+    }
+
+    function resetForm() {
+      $("#customerForm").reset();
+      $("#customerId").value = "";
+      $("#followStatus").value = "New / 新客户";
+      currentProfile = null;
+      updateProfilePreview();
+      $("#formStatus").textContent = "";
+    }
+
+    function inferProfile(data) {
+      let score = 42;
+      const purpose = data.purpose || "";
+      const budget = data.budget || "";
+      const concernsText = (data.concerns || []).join(" ");
+      const notesText = `${data.sensitiveReason || ""} ${data.fittingNotes || ""} ${data.notes || ""}`.toLowerCase();
+      const wantsHuman = data.hairTypePreference.includes("Human") || budget.includes("350") || budget.includes("500");
+      const needsMedical = purpose.includes("Medical") || purpose.includes("Hair loss") || notesText.includes("chemo") || notesText.includes("alopecia") || notesText.includes("medical");
+      const budgetSensitive = budget.includes("Under") || budget.includes("100-199") || concernsText.includes("Price");
+      const styleDriven = purpose.includes("Fashion") || purpose.includes("Event") || data.colorPreference.length > 8;
+      const comfortDriven = concernsText.includes("Comfort") || concernsText.includes("Breathable") || data.experience.includes("First");
+
+      let profileType = "Natural Daily / 自然日常型";
+      let profileTypeEn = "Natural Daily";
+      let priority = "Medium / 中";
+      let recommendation = "推荐 180% 发带款或 13x4 无胶款，先确认颜色、长度和试戴舒适度。";
+      let recommendationEn = "Recommend a 180% headband wig or 13x4 glueless wig, then confirm color, length, and comfort.";
+      let nextStep = "安排试戴并发送护理说明。";
+      let nextStepEn = "Book a try-on and send care instructions.";
+      let sku = data.recommendedSku;
+
+      if (needsMedical) {
+        profileType = "Medical Comfort / 医疗舒适型";
+        profileTypeEn = "Medical Comfort";
+        recommendation = "优先推荐舒适、透气、少胶水压力的款式，并谨慎记录医疗备注。";
+        recommendationEn = "Prioritize comfort, breathability, and low-glue options; handle medical notes carefully.";
+        nextStep = "确认头围、敏感点和可接受佩戴时长。";
+        nextStepEn = "Confirm cap size, sensitive areas, and wearable duration.";
+        sku ||= "DILISI-20260528-007";
+        score += 24;
+      } else if (wantsHuman) {
+        profileType = "Premium Human Hair / 高品质真人发型";
+        profileTypeEn = "Premium Human Hair";
+        recommendation = "推荐 HD lace bob 或 13x4 无胶真人发，重点讲自然度和长期护理。";
+        recommendationEn = "Recommend HD lace bob or 13x4 glueless human hair; focus on natural look and long-term care.";
+        nextStep = "给出两档报价并预约试戴。";
+        nextStepEn = "Offer two price tiers and book a fitting.";
+        sku ||= "DILISI-20260528-001";
+        score += 20;
+      } else if (budgetSensitive) {
+        profileType = "Budget Starter / 预算入门型";
+        profileTypeEn = "Budget Starter";
+        recommendation = "推荐化纤发带款或 2x4 bob，先降低第一次购买门槛。";
+        recommendationEn = "Recommend synthetic headband or 2x4 bob to make the first purchase easier.";
+        nextStep = "现场说明自然度、耐用度和护理差异。";
+        nextStepEn = "Explain naturalness, durability, and care trade-offs.";
+        sku ||= "DILISI-20260528-010";
+        score += 12;
+      } else if (styleDriven) {
+        profileType = "Style Explorer / 造型尝鲜型";
+        profileTypeEn = "Style Explorer";
+        recommendation = "推荐长发 body wave 或活动造型款，强调造型变化和拍照效果。";
+        recommendationEn = "Recommend body wave or event styling options; focus on styling and photo impact.";
+        nextStep = "确认颜色、场景和是否需要配件。";
+        nextStepEn = "Confirm color, use occasion, and accessory needs.";
+        sku ||= "DILISI-20260528-009";
+        score += 16;
+      } else if (comfortDriven) {
+        sku ||= "DILISI-20260528-007";
+        score += 14;
+      }
+
+      if (data.followStatus.includes("High intent") || data.followStatus.includes("Quoted")) score += 14;
+      if (data.phone || data.email) score += 8;
+      if (data.consent) score += 6;
+      if (data.concerns?.length > 2) score += 6;
+      if (data.followStatus.includes("Purchased")) {
+        score = Math.max(score, 96);
+        priority = "Completed / 已成交";
+      } else if (score >= 78) {
+        priority = "High / 高";
+      } else if (score < 55) {
+        priority = "Low / 低";
+      }
+
+      score = Math.max(0, Math.min(100, score));
+      const product = products.find((item) => item.sku === sku) || products[0];
+
+      return {
+        profileType,
+        profileTypeEn,
+        score,
+        priority,
+        recommendation,
+        recommendationEn,
+        nextStep,
+        nextStepEn,
+        recommendedSku: sku || product.sku,
+        recommendedProduct: product
+      };
+    }
+
+    function updateProfilePreview() {
+      const data = getFormData();
+      const profile = inferProfile(data);
+      currentProfile = profile;
+      $("#recommendedSku").value = data.recommendedSku || profile.recommendedSku;
+      $("#profilePreview").innerHTML = `
+        <div class="profile-title">
+          <div>
+            <h3>${escapeHtml(profile.profileTypeEn)}<span class="zh-secondary">${escapeHtml(profile.profileType.replace(profile.profileTypeEn + " / ", ""))}</span></h3>
+            <p class="muted">Client profile</p>
+          </div>
+          <div class="score">${profile.score}</div>
+        </div>
+        <div class="profile-grid">
+          <div class="profile-chip"><span>Priority<span class="zh-secondary">优先级</span></span><strong>${bilingualInline(profile.priority)}</strong></div>
+          <div class="profile-chip"><span>Product<span class="zh-secondary">推荐产品</span></span><strong>${escapeHtml(profile.recommendedProduct.en)}<span class="zh-secondary">${escapeHtml(profile.recommendedProduct.zh)}</span></strong></div>
+          <div class="profile-chip"><span>Recommended SKU<span class="zh-secondary">推荐 SKU</span></span><strong>${escapeHtml(profile.recommendedSku)}</strong></div>
+        </div>
+        <p><strong>Recommendation:</strong> ${escapeHtml(profile.recommendationEn)} <span class="zh-secondary">${escapeHtml(profile.recommendation)}</span></p>
+        <p><strong>Next step:</strong> ${escapeHtml(profile.nextStepEn)} <span class="zh-secondary">${escapeHtml(profile.nextStep)}</span></p>
+      `;
+    }
+
+    function saveCustomerFromForm() {
+      const data = getFormData();
+      if (!data.name && !data.phone && !data.email) {
+        $("#formStatus").textContent = "Please enter at least name, phone, or email. 请至少填写姓名、电话或邮箱。";
+        return;
+      }
+      if (!data.consent) {
+        $("#formStatus").textContent = "Please confirm client consent first. 请先确认客户同意记录信息。";
+        return;
+      }
+      const profile = inferProfile(data);
+      const now = new Date().toISOString();
+      const record = {
+        ...data,
+        recommendedSku: data.recommendedSku || profile.recommendedSku,
+        profileType: profile.profileType,
+        profileTypeEn: profile.profileTypeEn,
+        score: profile.score,
+        priority: profile.priority,
+        recommendation: profile.recommendation,
+        recommendationEn: profile.recommendationEn,
+        nextStep: profile.nextStep,
+        nextStepEn: profile.nextStepEn,
+        updatedAt: now
+      };
+
+      if (record.id) {
+        const index = customers.findIndex((customer) => customer.id === record.id);
+        record.createdAt = index >= 0 ? customers[index].createdAt : now;
+        if (index >= 0) customers[index] = record;
+        else customers.unshift(record);
+      } else {
+        record.id = `cxy-${Date.now()}`;
+        record.createdAt = now;
+        customers.unshift(record);
+        $("#customerId").value = record.id;
+      }
+
+      saveCustomers();
+      saveCloudCustomer(record).catch((error) => {
+        queueSync({ type: "customer", record, error: error.message });
+      });
+      renderAll();
+      $("#formStatus").textContent = "Client saved. 客户已保存。";
+    }
+
+    function filteredCustomers() {
+      const query = $("#searchInput").value.trim().toLowerCase();
+      const status = $("#filterStatus").value;
+      const profile = $("#filterProfile").value;
+      const budget = $("#filterBudget").value;
+      return customers.filter((customer) => {
+        const haystack = fields.map((field) => Array.isArray(customer[field]) ? customer[field].join(" ") : customer[field]).join(" ").toLowerCase();
+        return (!query || haystack.includes(query))
+          && (!status || customer.followStatus === status)
+          && (!profile || customer.profileType === profile)
+          && (!budget || customer.budget === budget);
+      });
+    }
+
+    function renderCustomers() {
+      const list = filteredCustomers();
+      if (!list.length) {
+        $("#customerList").innerHTML = '<div class="empty">No clients yet or no matching result.<span class="zh-secondary">暂无客户或没有匹配结果。</span></div>';
+        return;
+      }
+      $("#customerList").innerHTML = list.map((customer) => `
+        <article class="customer-card">
+          <div class="customer-top">
+            <div>
+              <strong>${escapeHtml(customer.name || "Unnamed Client")}</strong>
+              <p class="muted">${bilingualInline(customer.profileType || "")} · ${escapeHtml(customer.city || "No city")}</p>
+            </div>
+            <span class="score">${Number(customer.score || 0)}</span>
+          </div>
+          <div class="mini">
+            <div>Budget<span>${escapeHtml(customer.budget || "-")}</span></div>
+            <div>Status<span>${escapeHtml(customer.followStatus || "-")}</span></div>
+            <div>Priority<span>${bilingualInline(customer.priority || "-")}</span></div>
+          </div>
+          <p><strong>Recommendation:</strong> ${escapeHtml(customer.recommendedSku || "-")} · ${escapeHtml(customer.recommendationEn || "")}<span class="zh-secondary">${escapeHtml(customer.recommendation || "")}</span></p>
+          <p class="muted">${escapeHtml(customer.phone || "")} ${customer.email ? " · " + escapeHtml(customer.email) : ""}</p>
+          <div class="actions">
+            <button class="secondary" data-edit="${escapeHtml(customer.id)}">Edit</button>
+            <button data-poster="${escapeHtml(customer.id)}">Poster</button>
+            <button class="danger" data-delete="${escapeHtml(customer.id)}">Delete</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function countBy(items, getter) {
+      return items.reduce((acc, item) => {
+        const key = getter(item) || "Blank / 未填写";
+        acc[key] = (acc[key] || 0) + 1;
+        return acc;
+      }, {});
+    }
+
+    function getReport() {
+      const today = new Date();
+      const sevenDaysAgo = new Date(today);
+      sevenDaysAgo.setDate(today.getDate() - 7);
+      const todayKey = today.toISOString().slice(0, 10);
+      const highIntent = customers.filter((customer) => Number(customer.score || 0) >= 78 || customer.followStatus?.includes("High intent"));
+      return {
+        generatedAt: new Date().toISOString(),
+        totalClients: customers.length,
+        todayNew: customers.filter((customer) => customer.createdAt?.slice(0, 10) === todayKey).length,
+        last7Days: customers.filter((customer) => new Date(customer.createdAt) >= sevenDaysAgo).length,
+        highIntent: highIntent.length,
+        purchased: customers.filter((customer) => customer.followStatus?.includes("Purchased")).length,
+        byCity: countBy(customers, (customer) => customer.city),
+        byBudget: countBy(customers, (customer) => customer.budget),
+        byProfile: countBy(customers, (customer) => customer.profileType),
+        byPurpose: countBy(customers, (customer) => customer.purpose),
+        byStatus: countBy(customers, (customer) => customer.followStatus),
+        highIntentClients: highIntent.map((customer) => ({
+          name: customer.name,
+          city: customer.city,
+          score: customer.score,
+          status: customer.followStatus,
+          phone: customer.phone,
+          email: customer.email,
+          recommendedSku: customer.recommendedSku
+        }))
+      };
+    }
+
+    function renderBars(title, data) {
+      const entries = Object.entries(data);
+      const max = Math.max(...entries.map(([, value]) => value), 1);
+      return `
+        <article class="report-card">
+          <h3>${bilingualInline(title)}</h3>
+          <div class="bars">
+            ${entries.length ? entries.map(([key, value]) => `
+              <div class="bar-row">
+                <span>${escapeHtml(key)}</span>
+                <div class="bar"><i style="width: ${(value / max) * 100}%"></i></div>
+                <strong>${value}</strong>
+              </div>
+            `).join("") : '<p class="muted">No data</p>'}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderReports() {
+      const report = getReport();
+      $("#metrics").innerHTML = [
+        ["Total Clients / 总客户", report.totalClients],
+        ["Today New / 今日新增", report.todayNew],
+        ["Last 7 Days / 7天新增", report.last7Days],
+        ["High Intent / 高意向", report.highIntent]
+      ].map(([label, value]) => `<div class="metric"><span>${bilingualInline(label)}</span><strong>${value}</strong></div>`).join("");
+
+      $("#reportGrid").innerHTML = [
+        renderBars("Follow-up Status / 跟进状态", report.byStatus),
+        renderBars("Client Profiles / 用户画像", report.byProfile),
+        renderBars("Budget / 预算分布", report.byBudget),
+        renderBars("Purpose / 购买目的", report.byPurpose),
+        renderBars("City / 城市", report.byCity),
+        `<article class="report-card">
+          <h3>High Intent Clients<span class="zh-secondary">高意向客户</span></h3>
+          ${report.highIntentClients.length ? report.highIntentClients.map((client) => `
+            <p><strong>${escapeHtml(client.name || "Unnamed")}</strong> · ${escapeHtml(client.city || "-")} · ${client.score} · ${escapeHtml(client.recommendedSku || "-")}</p>
+          `).join("") : '<p class="muted">No high-intent clients yet.</p>'}
+        </article>`
+      ].join("");
+    }
+
+    function renderAll() {
+      renderProducts();
+      renderCustomers();
+      renderReports();
+      renderAdminProducts();
+      updateCloudStatus();
+    }
+
+    function applyRoleVisibility() {
+      const isAdmin = currentSession?.role === "admin";
+      $$('[data-role-only="admin"]').forEach((item) => item.classList.toggle("hidden", !isAdmin));
+      $("#sessionLabel").textContent = `${currentSession?.name || currentSession?.email || "Local sales demo"} · ${isAdmin ? "Admin" : "Sales"}`;
+      $("#logoutBtn").classList.toggle("hidden", Boolean(currentSession?.demo));
+      $("#loginToggleBtn").textContent = currentSession?.demo ? "Sign In" : "Switch User";
+      if (!isAdmin && $("#admin").classList.contains("active")) switchScreen("products");
+      initOptions();
+    }
+
+    function updateCloudStatus() {
+      const status = $("#cloudStatus");
+      if (!status) return;
+      const mode = cloudEnabled() ? "Cloud connected" : "Local demo mode";
+      const role = currentSession?.role === "admin" ? "Admin" : "Sales";
+      status.textContent = `${mode}. Current role: ${role}.`;
+    }
+
+    function productFormData() {
+      return normalizeProduct({
+        id: $("#productId").value || $("#productSku").value || `product-${Date.now()}`,
+        sku: $("#productSku").value.trim(),
+        sortOrder: $("#productSort").value || 999,
+        en: $("#productNameEn").value.trim(),
+        zh: $("#productNameZh").value.trim(),
+        type: $("#productType").value.trim(),
+        inch: $("#productInch").value.trim(),
+        style: $("#productStyle").value.trim(),
+        price: $("#productPrice").value.trim(),
+        tags: $("#productTags").value,
+        cover: $("#productCover").value.trim(),
+        images: $("#productImages").value,
+        videos: $("#productVideos").value,
+        fitEn: $("#productFitEn").value.trim(),
+        fit: $("#productFitZh").value.trim(),
+        talkEn: $("#productTalkEn").value.trim(),
+        talk: $("#productTalkZh").value.trim()
+      });
+    }
+
+    function setProductForm(product = {}) {
+      const item = normalizeProduct(product);
+      $("#productId").value = item.id || "";
+      $("#productSku").value = item.sku || "";
+      $("#productSort").value = item.sortOrder === 999 ? "" : item.sortOrder;
+      $("#productNameEn").value = item.en || "";
+      $("#productNameZh").value = item.zh || "";
+      $("#productType").value = item.type || "";
+      $("#productInch").value = item.inch || "";
+      $("#productStyle").value = item.style || "";
+      $("#productPrice").value = item.price || "";
+      $("#productTags").value = (item.tags || []).join(", ");
+      $("#productCover").value = item.cover || "";
+      $("#productImages").value = (item.images || []).join("\n");
+      $("#productVideos").value = (item.videos || []).join("\n");
+      $("#productFitEn").value = item.fitEn || "";
+      $("#productFitZh").value = item.fit || "";
+      $("#productTalkEn").value = item.talkEn || "";
+      $("#productTalkZh").value = item.talk || "";
+    }
+
+    function renderAdminProducts() {
+      const list = $("#adminProductList");
+      if (!list) return;
+      list.innerHTML = products.map((product) => `
+        <article class="admin-product">
+          <strong>${escapeHtml(product.en || product.sku)}<span class="zh-secondary">${escapeHtml(product.zh || "")}</span></strong>
+          <p class="muted">${escapeHtml(product.sku)} · ${escapeHtml(product.price || "")}</p>
+          <div class="actions">
+            <button class="secondary" data-product-edit="${escapeHtml(product.id)}">Edit</button>
+            <button class="danger" data-product-delete="${escapeHtml(product.id)}">Delete</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function downloadFile(filename, content, type) {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function csvEscape(value) {
+      const raw = Array.isArray(value) ? value.join("; ") : String(value ?? "");
+      return `"${raw.replace(/"/g, '""')}"`;
+    }
+
+    function customersToCsv(list = customers) {
+      return [
+        fields.join(","),
+        ...list.map((customer) => fields.map((field) => csvEscape(customer[field])).join(","))
+      ].join("\n");
+    }
+
+    function reportToCsv() {
+      const report = getReport();
+      const rows = [
+        ["section", "key", "value"],
+        ["summary", "totalClients", report.totalClients],
+        ["summary", "todayNew", report.todayNew],
+        ["summary", "last7Days", report.last7Days],
+        ["summary", "highIntent", report.highIntent],
+        ["summary", "purchased", report.purchased]
+      ];
+      ["byCity", "byBudget", "byProfile", "byPurpose", "byStatus"].forEach((section) => {
+        Object.entries(report[section]).forEach(([key, value]) => rows.push([section, key, value]));
+      });
+      report.highIntentClients.forEach((client) => rows.push(["highIntentClient", client.name || "", `${client.score || 0} / ${client.recommendedSku || ""}`]));
+      return rows.map((row) => row.map(csvEscape).join(",")).join("\n");
+    }
+
+    function filename(prefix, ext) {
+      return `${prefix}_${new Date().toISOString().slice(0, 10)}.${ext}`;
+    }
+
+    function drawPoster(customer) {
+      const canvas = $("#posterCanvas");
+      const ctx = canvas.getContext("2d");
+      const profile = inferProfile(customer);
+      const product = products.find((item) => item.sku === customer.recommendedSku) || profile.recommendedProduct;
+      ctx.fillStyle = "#f8fbf9";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0d6b57";
+      ctx.fillRect(0, 0, canvas.width, 260);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "800 72px system-ui, sans-serif";
+      ctx.fillText("CXY Wigs", 78, 116);
+      ctx.font = "400 34px system-ui, sans-serif";
+      ctx.fillText("Client Profile Poster", 80, 174);
+      ctx.font = "400 25px system-ui, sans-serif";
+      ctx.fillText("客户画像海报", 80, 212);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.globalAlpha = .16;
+      ctx.beginPath();
+      ctx.arc(1010, 122, 190, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      ctx.fillStyle = "#18211d";
+      ctx.font = "800 56px system-ui, sans-serif";
+      ctx.fillText(customer.name || "Unnamed Client", 78, 360);
+      ctx.fillStyle = "#174a7c";
+      ctx.fillText(customer.profileType || profile.profileType, 78, 435);
+
+      ctx.fillStyle = "#174a7c";
+      ctx.fillRect(880, 318, 160, 160);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "900 68px system-ui, sans-serif";
+      ctx.fillText(String(customer.score || profile.score), 916, 417);
+      ctx.font = "700 26px system-ui, sans-serif";
+      ctx.fillText("Score", 918, 454);
+
+      const sections = [
+        ["Recommendation", customer.recommendationEn || profile.recommendationEn],
+        ["推荐", customer.recommendation || profile.recommendation],
+        ["Recommended SKU", `${customer.recommendedSku || profile.recommendedSku} - ${product.en}`],
+        ["Budget", customer.budget || "-"],
+        ["Purpose", customer.purpose || "-"],
+        ["Concerns", (customer.concerns || []).join(", ") || "-"],
+        ["Next Step", customer.nextStepEn || profile.nextStepEn],
+        ["下一步", customer.nextStep || profile.nextStep],
+        ["Notes", customer.notes || customer.fittingNotes || "-"]
+      ];
+
+      let y = 560;
+      sections.forEach(([title, value]) => {
+        ctx.fillStyle = "#66736d";
+        ctx.font = "700 28px system-ui, sans-serif";
+        ctx.fillText(title, 78, y);
+        ctx.fillStyle = "#18211d";
+        ctx.font = "500 34px system-ui, sans-serif";
+        y = wrapText(ctx, value, 78, y + 48, 990, 44) + 34;
+      });
+
+      ctx.fillStyle = "#0d6b57";
+      ctx.fillRect(78, 1450, 1044, 4);
+      ctx.fillStyle = "#66736d";
+      ctx.font = "500 25px system-ui, sans-serif";
+      ctx.fillText("Generated locally. Keep client information private.", 78, 1515);
+      return canvas;
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+      const words = String(text || "").split(/\s+/);
+      let line = "";
+      words.forEach((word) => {
+        const testLine = line ? `${line} ${word}` : word;
+        if (ctx.measureText(testLine).width > maxWidth && line) {
+          ctx.fillText(line, x, y);
+          line = word;
+          y += lineHeight;
+        } else {
+          line = testLine;
+        }
+      });
+      ctx.fillText(line, x, y);
+      return y;
+    }
+
+    function downloadPoster(customerId) {
+      const customer = customers.find((item) => item.id === customerId);
+      if (!customer) return;
+      const canvas = drawPoster(customer);
+      canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `CXY_profile_${(customer.name || "client").replace(/\s+/g, "_")}.png`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+      }, "image/png");
+    }
+
+    function switchScreen(id) {
+      $$(".screen").forEach((screen) => screen.classList.toggle("active", screen.id === id));
+      $$(".nav button").forEach((button) => button.classList.toggle("active", button.dataset.screen === id));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function bindEvents() {
+      $$(".nav button").forEach((button) => button.addEventListener("click", () => switchScreen(button.dataset.screen)));
+      $$("[data-screen-jump]").forEach((button) => button.addEventListener("click", () => switchScreen(button.dataset.screenJump)));
+      $("#customerForm").addEventListener("input", updateProfilePreview);
+      $("#saveCustomerBtn").addEventListener("click", saveCustomerFromForm);
+      $("#resetFormBtn").addEventListener("click", resetForm);
+      ["searchInput", "filterStatus", "filterProfile", "filterBudget"].forEach((id) => $("#" + id).addEventListener("input", renderCustomers));
+      $("#loginToggleBtn").addEventListener("click", () => $("#loginPanel").classList.toggle("hidden"));
+      $("#useDemoSalesBtn").addEventListener("click", () => {
+        saveSession(demoSession("sales"));
+        $("#loginPanel").classList.add("hidden");
+      });
+      $("#useDemoAdminBtn").addEventListener("click", () => {
+        saveSession(demoSession("admin"));
+        $("#loginPanel").classList.add("hidden");
+      });
+      $("#logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem(SESSION_KEY);
+        saveSession(demoSession("sales"));
+      });
+      $("#signInBtn").addEventListener("click", async () => {
+        $("#loginStatus").textContent = "Signing in...";
+        try {
+          await signInWithPassword($("#loginEmail").value.trim(), $("#loginPassword").value);
+          $("#loginPanel").classList.add("hidden");
+          $("#loginStatus").textContent = "Signed in.";
+        } catch (error) {
+          $("#loginStatus").textContent = `Sign in failed: ${error.message}`;
+        }
+      });
+
+      $("#customerList").addEventListener("click", (event) => {
+        const editId = event.target.dataset.edit;
+        const posterId = event.target.dataset.poster;
+        const deleteId = event.target.dataset.delete;
+        if (editId) {
+          const customer = customers.find((item) => item.id === editId);
+          if (customer) {
+            setFormData(customer);
+            switchScreen("newCustomer");
+          }
+        }
+        if (posterId) downloadPoster(posterId);
+        if (deleteId && confirm("Delete this client? 确定删除这个客户吗？")) {
+          customers = customers.filter((item) => item.id !== deleteId);
+          saveCustomers();
+          renderAll();
+        }
+      });
+
+      $("#exportCustomersCsvBtn").addEventListener("click", () => {
+        downloadFile(filename("cxy_clients", "csv"), "\ufeff" + customersToCsv(), "text/csv;charset=utf-8");
+        $("#exportStatus").textContent = "Client CSV exported. 客户 CSV 已生成。";
+      });
+      $("#exportCustomersJsonBtn").addEventListener("click", () => {
+        downloadFile(filename("cxy_clients", "json"), JSON.stringify(customers, null, 2), "application/json");
+        $("#exportStatus").textContent = "Client JSON exported. 客户 JSON 已生成。";
+      });
+      $("#exportReportCsvBtn").addEventListener("click", () => {
+        downloadFile(filename("cxy_report", "csv"), "\ufeff" + reportToCsv(), "text/csv;charset=utf-8");
+      });
+      $("#exportReportJsonBtn").addEventListener("click", () => {
+        downloadFile(filename("cxy_report", "json"), JSON.stringify(getReport(), null, 2), "application/json");
+        $("#exportStatus").textContent = "Report JSON exported. 报表 JSON 已生成。";
+      });
+      $("#clearAllBtn").addEventListener("click", () => {
+        if (confirm("This will delete all client records in this browser. Continue? 这会删除当前浏览器里的所有客户记录。")) {
+          customers = [];
+          saveCustomers();
+          renderAll();
+          $("#exportStatus").textContent = "Local client records cleared. 本地客户数据已清空。";
+        }
+      });
+      $("#newProductBtn").addEventListener("click", () => setProductForm({}));
+      $("#reloadCloudBtn").addEventListener("click", async () => {
+        $("#productAdminStatus").textContent = "Loading cloud products...";
+        try {
+          await loadCloudProducts();
+          renderAll();
+          $("#productAdminStatus").textContent = "Cloud products loaded.";
+        } catch (error) {
+          $("#productAdminStatus").textContent = `Cloud load failed: ${error.message}`;
+        }
+      });
+      $("#saveProductBtn").addEventListener("click", async () => {
+        if (currentSession.role !== "admin") {
+          $("#productAdminStatus").textContent = "Admin role required.";
+          return;
+        }
+        const product = productFormData();
+        if (!product.sku || !product.en) {
+          $("#productAdminStatus").textContent = "SKU and English name are required.";
+          return;
+        }
+        const index = products.findIndex((item) => item.id === product.id || item.sku === product.sku);
+        if (index >= 0) products[index] = product;
+        else products.push(product);
+        products.sort((a, b) => Number(a.sortOrder || 999) - Number(b.sortOrder || 999));
+        saveLocalProducts();
+        try {
+          await saveCloudProduct(product);
+          $("#productAdminStatus").textContent = cloudEnabled() ? "Product saved to cloud." : "Product saved locally.";
+        } catch (error) {
+          $("#productAdminStatus").textContent = `Saved locally. Cloud failed: ${error.message}`;
+        }
+        initOptions();
+        renderAll();
+      });
+      $("#exportProductsBtn").addEventListener("click", () => {
+        downloadFile(filename("cxy_products", "json"), JSON.stringify(products, null, 2), "application/json");
+      });
+      $("#adminProductList").addEventListener("click", async (event) => {
+        const editId = event.target.dataset.productEdit;
+        const deleteId = event.target.dataset.productDelete;
+        if (editId) {
+          const product = products.find((item) => item.id === editId);
+          if (product) setProductForm(product);
+        }
+        if (deleteId && confirm("Delete this product? 删除这个商品？")) {
+          products = products.filter((item) => item.id !== deleteId);
+          saveLocalProducts();
+          await deleteCloudProduct(deleteId).catch(() => false);
+          initOptions();
+          renderAll();
+        }
+      });
+    }
+
+    initOptions();
+    bindEvents();
+    applyRoleVisibility();
+    resetForm();
+    renderAll();
+  </script>
+</body>
+</html>
