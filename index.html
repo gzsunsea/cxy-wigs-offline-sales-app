@@ -361,6 +361,7 @@
     }
 
     .product-media {
+      position: relative;
       display: grid;
       min-height: 190px;
       overflow: hidden;
@@ -408,6 +409,49 @@
       font-size: 12px;
       font-weight: 760;
       text-decoration: none;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .carousel-controls button,
+    .carousel-count {
+      min-height: 30px;
+      border-color: rgba(255, 255, 255, .72);
+      background: rgba(44, 44, 44, .62);
+      color: #fff;
+      font-size: 12px;
+      pointer-events: auto;
+    }
+
+    .carousel-count {
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 780;
+    }
+
+    .product-detail {
+      display: grid;
+      gap: 16px;
+    }
+
+    .product-detail .product-media {
+      min-height: min(58vh, 520px);
+    }
+
+    .product-detail .product-media img,
+    .product-detail .product-media video {
+      min-height: min(58vh, 520px);
     }
 
     .tag-row {
@@ -779,7 +823,7 @@
       </div>
 
       <div class="login-form">
-        <label><span>Account<span class="zh-secondary">账号</span></span><input id="loginEmail" autocomplete="username" placeholder="kinsun62@gmaill.com / cxzwigs01"></label>
+        <label><span>Account<span class="zh-secondary">账号</span></span><input id="loginEmail" autocomplete="username" placeholder="kinsun62@gmail.com / cxywigs01"></label>
         <label><span>Password<span class="zh-secondary">密码</span></span><input id="loginPassword" type="password" autocomplete="current-password" placeholder="88888888"></label>
         <button id="signInBtn">Sign In</button>
         <div id="loginStatus" class="status"></div>
@@ -797,6 +841,10 @@
         </div>
       </div>
       <div id="productGrid" class="product-grid"></div>
+    </section>
+
+    <section id="productDetail" class="screen">
+      <div id="productDetailContent"></div>
     </section>
 
     <section id="newCustomer" class="screen">
@@ -1012,6 +1060,7 @@
             <label><span>Length<span class="zh-secondary">长度</span></span><input id="productInch" placeholder="12 inch"></label>
             <label><span>Style<span class="zh-secondary">发型</span></span><input id="productStyle" placeholder="st 1b bob"></label>
             <label><span>Price<span class="zh-secondary">价格</span></span><input id="productPrice" placeholder="C$349-399 Calgary"></label>
+            <label><span>Visibility<span class="zh-secondary">是否展示</span></span><select id="productVisible"><option value="true">Visible / 显示</option><option value="false">Hidden / 隐藏</option></select></label>
             <label class="span-2"><span>Tags<span class="zh-secondary">标签，逗号分隔</span></span><input id="productTags" placeholder="HD lace, 250% density, Premium"></label>
             <label class="span-2"><span>Cover Image URL<span class="zh-secondary">主图 URL</span></span><input id="productCover" placeholder="https://... or media/products/.../cover.jpg"></label>
             <label class="span-2"><span>Image URLs<span class="zh-secondary">图片 URL，每行一个</span></span><textarea id="productImages" placeholder="https://..."></textarea></label>
@@ -1062,9 +1111,9 @@
     const cloudConfig = window.CXY_APP_CONFIG || {};
 
     const defaultLocalUsers = [
-      { id: "admin-kinsun62", account: "kinsun62@gmaill.com", password: "88888888", name: "CXY Admin 1", role: "admin" },
-      { id: "admin-gzsunsea", account: "gzsunsea@gmaill.com", password: "88888888", name: "CXY Admin 2", role: "admin" },
-      { id: "sales-cxzwigs01", account: "cxzwigs01", password: "88888888", name: "CXY Sales 01", role: "sales" }
+      { id: "admin-kinsun62", account: "kinsun62@gmail.com", password: "88888888", name: "CXY Admin 1", role: "admin" },
+      { id: "admin-gzsunsea", account: "gzsunsea@gmail.com", password: "88888888", name: "CXY Admin 2", role: "admin" },
+      { id: "sales-cxywigs01", account: "cxywigs01", password: "88888888", name: "CXY Sales 01", role: "sales" }
     ];
 
     const defaultProducts = [
@@ -1189,6 +1238,8 @@
     let preferences = loadPreferences();
     let customers = loadCustomers();
     let currentProfile = null;
+    let currentProductDetailId = "";
+    const carouselIndexes = {};
 
     const $ = (selector) => document.querySelector(selector);
     const $$ = (selector) => Array.from(document.querySelectorAll(selector));
@@ -1333,6 +1384,7 @@
         images: normalizeList(product.images || product.image_urls || product.imageUrls),
         videos: normalizeList(product.videos || product.video_urls || product.videoUrls),
         tags: normalizeList(product.tags),
+        visible: product.visible ?? product.is_visible ?? true,
         sortOrder: Number(product.sortOrder ?? product.sort_order ?? 999)
       };
     }
@@ -1356,6 +1408,7 @@
         image_urls: normalized.images,
         video_urls: normalized.videos,
         tags: normalized.tags,
+        visible: normalized.visible,
         sort_order: normalized.sortOrder,
         updated_at: new Date().toISOString()
       };
@@ -1619,14 +1672,45 @@
       renderPreferencesForm();
     }
 
+    function productMediaItems(product) {
+      const items = [];
+      if (product.cover) items.push({ type: "image", url: product.cover, label: "Cover" });
+      (product.images || []).forEach((url, index) => items.push({ type: "image", url, label: `Image ${index + 1}` }));
+      (product.videos || []).forEach((url, index) => items.push({ type: "video", url, label: `Video ${index + 1}` }));
+      return items;
+    }
+
+    function renderMediaCarousel(product, mode = "card") {
+      const items = productMediaItems(product);
+      const key = `${mode}-${product.id}`;
+      const index = Math.min(carouselIndexes[key] || 0, Math.max(items.length - 1, 0));
+      carouselIndexes[key] = index;
+      if (!items.length) {
+        return `<div class="product-media"><div class="media-placeholder">CXY Wigs<span class="zh-secondary">Product media ready</span></div></div>`;
+      }
+      const item = items[index];
+      const media = item.type === "video"
+        ? `<video src="${escapeHtml(item.url)}" controls playsinline preload="metadata"></video>`
+        : `<img src="${escapeHtml(item.url)}" alt="${escapeHtml(product.en)} ${escapeHtml(item.label)}">`;
+      return `
+        <div class="product-media">
+          ${media}
+          ${items.length > 1 ? `
+            <div class="carousel-controls">
+              <button type="button" data-carousel-prev="${escapeHtml(product.id)}" data-carousel-mode="${escapeHtml(mode)}">Prev</button>
+              <span class="carousel-count">${index + 1}/${items.length}</span>
+              <button type="button" data-carousel-next="${escapeHtml(product.id)}" data-carousel-mode="${escapeHtml(mode)}">Next</button>
+            </div>
+          ` : ""}
+        </div>
+      `;
+    }
+
     function renderProducts() {
-      $("#productGrid").innerHTML = products.map((product) => `
+      const visibleProducts = products.filter((product) => product.visible !== false);
+      $("#productGrid").innerHTML = visibleProducts.map((product) => `
         <article class="product-card">
-          <div class="product-media">
-            ${product.cover
-              ? `<img src="${escapeHtml(product.cover)}" alt="${escapeHtml(product.en)}">`
-              : `<div class="media-placeholder">CXY Wigs<span class="zh-secondary">Product media ready</span></div>`}
-          </div>
+          ${renderMediaCarousel(product, "card")}
           <div class="tag-row">
             ${product.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
           </div>
@@ -1646,8 +1730,54 @@
             ${(product.images || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Image ${index + 1}</a>`).join("")}
             ${(product.videos || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Video ${index + 1}</a>`).join("")}
           </div>
+          <div class="actions">
+            <button type="button" data-product-more="${escapeHtml(product.id)}">More</button>
+          </div>
         </article>
-      `).join("");
+      `).join("") || '<div class="empty">No visible products.<span class="zh-secondary">暂无展示商品。</span></div>';
+      renderProductDetail();
+    }
+
+    function renderProductDetail() {
+      const product = products.find((item) => item.id === currentProductDetailId);
+      const container = $("#productDetailContent");
+      if (!container) return;
+      if (!product) {
+        container.innerHTML = "";
+        return;
+      }
+      container.innerHTML = `
+        <article class="product-detail">
+          <div class="section-head">
+            <div>
+              <h2>${escapeHtml(product.en)}<span class="zh-secondary">${escapeHtml(product.zh)}</span></h2>
+              <p class="muted">${escapeHtml(product.sku)} · ${escapeHtml(product.type)} · ${escapeHtml(product.inch)} · ${escapeHtml(product.style)}</p>
+            </div>
+            <div class="actions">
+              <button type="button" class="secondary" id="closeProductDetailBtn">Back to Products</button>
+            </div>
+          </div>
+          ${renderMediaCarousel(product, "detail")}
+          <div class="tag-row">${product.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div>
+          <div class="price">${escapeHtml(product.price)}</div>
+          <div class="admin-grid">
+            <div class="report-panel">
+              <h3>Fit<span class="zh-secondary">适合人群</span></h3>
+              <p>${escapeHtml(product.fitEn)}</p>
+              <p class="muted">${escapeHtml(product.fit)}</p>
+            </div>
+            <div class="report-panel">
+              <h3>Sales Talk<span class="zh-secondary">销售话术</span></h3>
+              <p>${escapeHtml(product.talkEn)}</p>
+              <p class="muted">${escapeHtml(product.talk)}</p>
+            </div>
+          </div>
+          <div class="media-strip">
+            ${(product.images || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Image ${index + 1}</a>`).join("")}
+            ${(product.videos || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Video ${index + 1}</a>`).join("")}
+          </div>
+        </article>
+      `;
     }
 
     function getFormData() {
@@ -2042,6 +2172,7 @@
         inch: $("#productInch").value.trim(),
         style: $("#productStyle").value.trim(),
         price: $("#productPrice").value.trim(),
+        visible: $("#productVisible").value === "true",
         tags: $("#productTags").value,
         cover: $("#productCover").value.trim(),
         images: $("#productImages").value,
@@ -2064,6 +2195,7 @@
       $("#productInch").value = item.inch || "";
       $("#productStyle").value = item.style || "";
       $("#productPrice").value = item.price || "";
+      $("#productVisible").value = item.visible === false ? "false" : "true";
       $("#productTags").value = (item.tags || []).join(", ");
       $("#productCover").value = item.cover || "";
       $("#productImages").value = (item.images || []).join("\n");
@@ -2080,9 +2212,10 @@
       list.innerHTML = products.map((product) => `
         <article class="admin-product">
           <strong>${escapeHtml(product.en || product.sku)}<span class="zh-secondary">${escapeHtml(product.zh || "")}</span></strong>
-          <p class="muted">${escapeHtml(product.sku)} · ${escapeHtml(product.price || "")}</p>
+          <p class="muted">${escapeHtml(product.sku)} · ${escapeHtml(product.price || "")} · ${product.visible === false ? "Hidden / 隐藏" : "Visible / 显示"}</p>
           <div class="actions">
             <button class="secondary" data-product-edit="${escapeHtml(product.id)}">Edit</button>
+            <button class="secondary" data-product-toggle="${escapeHtml(product.id)}">${product.visible === false ? "Show" : "Hide"}</button>
             <button class="danger" data-product-delete="${escapeHtml(product.id)}">Delete</button>
           </div>
         </article>
@@ -2248,6 +2381,36 @@
       $("#saveCustomerBtn").addEventListener("click", saveCustomerFromForm);
       $("#resetFormBtn").addEventListener("click", resetForm);
       ["searchInput", "filterStatus", "filterProfile", "filterBudget"].forEach((id) => $("#" + id).addEventListener("input", renderCustomers));
+      $("#productGrid").addEventListener("click", (event) => {
+        const moreId = event.target.dataset.productMore;
+        if (moreId) {
+          currentProductDetailId = moreId;
+          renderProductDetail();
+          switchScreen("productDetail");
+        }
+      });
+      $("#productDetailContent").addEventListener("click", (event) => {
+        if (event.target.id === "closeProductDetailBtn") {
+          currentProductDetailId = "";
+          switchScreen("products");
+        }
+      });
+      document.addEventListener("click", (event) => {
+        const prevId = event.target.dataset.carouselPrev;
+        const nextId = event.target.dataset.carouselNext;
+        if (!prevId && !nextId) return;
+        const productId = prevId || nextId;
+        const mode = event.target.dataset.carouselMode || "card";
+        const product = products.find((item) => item.id === productId);
+        if (!product) return;
+        const key = `${mode}-${productId}`;
+        const count = productMediaItems(product).length;
+        if (count < 2) return;
+        const current = carouselIndexes[key] || 0;
+        carouselIndexes[key] = prevId ? (current - 1 + count) % count : (current + 1) % count;
+        if (mode === "detail") renderProductDetail();
+        else renderProducts();
+      });
       $("#logoutBtn").addEventListener("click", signOut);
       $("#mySignOutBtn").addEventListener("click", signOut);
       ["loginEmail", "loginPassword"].forEach((id) => $("#" + id).addEventListener("keydown", (event) => {
@@ -2372,10 +2535,21 @@
       });
       $("#adminProductList").addEventListener("click", async (event) => {
         const editId = event.target.dataset.productEdit;
+        const toggleId = event.target.dataset.productToggle;
         const deleteId = event.target.dataset.productDelete;
         if (editId) {
           const product = products.find((item) => item.id === editId);
           if (product) setProductForm(product);
+        }
+        if (toggleId) {
+          const product = products.find((item) => item.id === toggleId);
+          if (product) {
+            product.visible = product.visible === false;
+            saveLocalProducts();
+            await saveCloudProduct(product).catch(() => false);
+            initOptions();
+            renderAll();
+          }
         }
         if (deleteId && confirm("Delete this product? 删除这个商品？")) {
           products = products.filter((item) => item.id !== deleteId);
