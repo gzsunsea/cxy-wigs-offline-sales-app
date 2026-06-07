@@ -125,19 +125,21 @@
       font-weight: 620;
     }
 
-    header {
-      padding: 24px 26px 16px;
-      border-bottom: 1px solid var(--line);
-      background: #ffffff;
+    .login-screen {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: linear-gradient(180deg, #fff 0%, #faf8f5 100%);
     }
 
-    .topbar {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1280px;
-      margin: 0 auto;
+    .login-card {
+      width: min(100%, 520px);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 26px;
+      background: #fff;
+      box-shadow: var(--shadow-strong);
     }
 
     .brand {
@@ -165,6 +167,12 @@
       margin: 5px 0 0;
       color: var(--muted);
       font-size: 14px;
+    }
+
+    .login-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
     }
 
     .nav {
@@ -198,23 +206,39 @@
       display: flex;
       gap: 8px;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: center;
       flex-wrap: wrap;
       color: var(--muted);
       font-size: 13px;
       font-weight: 700;
+      padding: 10px 16px 74px;
     }
 
-    .login-panel {
-      display: grid;
-      gap: 14px;
-      max-width: 520px;
-      margin: 24px auto 0;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 20px;
-      background: #fff;
-      box-shadow: var(--shadow);
+    .app-shell {
+      min-height: 100vh;
+      padding-bottom: 72px;
+    }
+
+    .app-tabbar {
+      position: fixed;
+      z-index: 5;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-top: 1px solid var(--line);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(12px);
+    }
+
+    .app-tabbar .nav {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      justify-content: center;
+    }
+
+    .app-tabbar .user-bar {
+      display: none;
     }
 
     main {
@@ -687,9 +711,7 @@
     .hidden { display: none !important; }
 
     @media (max-width: 980px) {
-      header { padding: 18px 18px 12px; }
       main { padding: 18px 18px 96px; }
-      .topbar { align-items: start; flex-direction: column; }
       .nav { width: 100%; justify-content: start; }
       .hero-band, .product-grid, .customer-grid, .report-grid, .admin-grid { grid-template-columns: 1fr; }
       .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -702,17 +724,12 @@
       h1 { font-size: 20px; }
       .intro-panel h2 { font-size: 24px; }
       .brand-logo { width: 118px; height: 58px; }
+      .login-screen { padding: 18px; }
+      .login-card { padding: 20px; }
       .nav {
-        position: fixed;
-        z-index: 4;
-        left: 0;
-        right: 0;
-        bottom: 0;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 0;
-        border-top: 1px solid var(--line);
-        background: #fff;
       }
       .nav button {
         min-height: 58px;
@@ -751,8 +768,8 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="topbar">
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
       <div class="brand">
         <img class="brand-logo" src="media/brand/cxy-wigs-logo-horizontal.png" alt="CXY Wigs">
         <div>
@@ -760,38 +777,18 @@
           <p class="subtitle">线下客户咨询、画像海报和导出报表工具</p>
         </div>
       </div>
-      <nav class="nav" aria-label="主导航">
-        <button data-screen="newCustomer">New<span class="zh-secondary">新增</span></button>
-        <button data-screen="customers">Clients<span class="zh-secondary">客户</span></button>
-        <button class="active" data-screen="products">Products<span class="zh-secondary">商品</span></button>
-        <button data-screen="reports">Reports<span class="zh-secondary">报表</span></button>
-        <button data-screen="admin" data-role-only="admin">Admin<span class="zh-secondary">后台</span></button>
-        <button data-screen="my">My<span class="zh-secondary">我的</span></button>
-      </nav>
-      <div class="user-bar">
-        <span id="sessionLabel">Local sales demo</span>
-        <button class="secondary" id="loginToggleBtn">Sign In</button>
-        <button class="secondary hidden" id="logoutBtn">Sign Out</button>
+
+      <div class="login-form">
+        <label><span>Account<span class="zh-secondary">账号</span></span><input id="loginEmail" autocomplete="username" placeholder="kinsun62@gmaill.com / cxzwigs01"></label>
+        <label><span>Password<span class="zh-secondary">密码</span></span><input id="loginPassword" type="password" autocomplete="current-password" placeholder="88888888"></label>
+        <button id="signInBtn">Sign In</button>
+        <div id="loginStatus" class="status"></div>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section id="loginPanel" class="login-panel hidden">
-      <div>
-        <h2>Sign In<span class="zh-secondary">登录</span></h2>
-        <p class="muted">Sales reps only see their own clients. Admins can manage products and see team reports.</p>
-      </div>
-      <label><span>Email<span class="zh-secondary">邮箱</span></span><input id="loginEmail" autocomplete="email" placeholder="sales@example.com"></label>
-      <label><span>Password<span class="zh-secondary">密码</span></span><input id="loginPassword" type="password" autocomplete="current-password"></label>
-      <div class="actions">
-        <button id="signInBtn">Sign In</button>
-        <button class="secondary" id="useDemoSalesBtn">Use Sales Demo</button>
-        <button class="secondary" id="useDemoAdminBtn">Use Admin Demo</button>
-      </div>
-      <div id="loginStatus" class="status"></div>
-    </section>
-
+  <div id="appShell" class="app-shell hidden">
+    <main>
     <section id="products" class="screen active">
       <div class="section-head">
         <div>
@@ -942,9 +939,8 @@
       <div class="admin-grid">
         <div class="report-panel">
           <h3>Account<span class="zh-secondary">账号</span></h3>
-          <p id="myAccountSummary" class="muted">Sales Demo · Sales</p>
+          <p id="myAccountSummary" class="muted">Not signed in</p>
           <div class="actions">
-            <button class="secondary" id="mySignInBtn">Sign In / Switch User</button>
             <button class="secondary" id="mySignOutBtn">Sign Out</button>
           </div>
         </div>
@@ -1039,6 +1035,22 @@
     </section>
   </main>
 
+  <div class="app-tabbar">
+    <nav class="nav" aria-label="主导航">
+        <button data-screen="newCustomer">New<span class="zh-secondary">新增</span></button>
+        <button data-screen="customers">Clients<span class="zh-secondary">客户</span></button>
+        <button class="active" data-screen="products">Products<span class="zh-secondary">商品</span></button>
+        <button data-screen="reports">Reports<span class="zh-secondary">报表</span></button>
+        <button data-screen="admin" data-role-only="admin">Admin<span class="zh-secondary">后台</span></button>
+        <button data-screen="my">My<span class="zh-secondary">我的</span></button>
+      </nav>
+      <div class="user-bar">
+        <span id="sessionLabel">Not signed in</span>
+        <button class="secondary hidden" id="logoutBtn">Sign Out</button>
+      </div>
+  </div>
+  </div>
+
   <script src="config.js"></script>
   <script>
     const STORAGE_KEY = "cxy_offline_sales_clients_v1";
@@ -1046,7 +1058,14 @@
     const SYNC_QUEUE_KEY = "cxy_offline_sales_sync_queue_v1";
     const SESSION_KEY = "cxy_offline_sales_session_v1";
     const PREFERENCES_KEY = "cxy_offline_sales_preferences_v1";
+    const LOCAL_USERS_KEY = "cxy_offline_sales_local_users_v1";
     const cloudConfig = window.CXY_APP_CONFIG || {};
+
+    const defaultLocalUsers = [
+      { id: "admin-kinsun62", account: "kinsun62@gmaill.com", password: "88888888", name: "CXY Admin 1", role: "admin" },
+      { id: "admin-gzsunsea", account: "gzsunsea@gmaill.com", password: "88888888", name: "CXY Admin 2", role: "admin" },
+      { id: "sales-cxzwigs01", account: "cxzwigs01", password: "88888888", name: "CXY Sales 01", role: "sales" }
+    ];
 
     const defaultProducts = [
       {
@@ -1174,32 +1193,60 @@
     const $ = (selector) => document.querySelector(selector);
     const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
-    function demoSession(role = "sales") {
-      return {
-        id: role === "admin" ? "demo-admin" : "demo-sales",
-        email: role === "admin" ? "admin@cxywigs.local" : "sales@cxywigs.local",
-        name: role === "admin" ? "CXY Admin" : "Sales Demo",
-        role,
-        token: "",
-        demo: true
-      };
-    }
-
     function loadSession() {
       try {
-        return JSON.parse(localStorage.getItem(SESSION_KEY) || "null") || demoSession("sales");
+        return JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
       } catch {
-        return demoSession("sales");
+        return null;
       }
     }
 
     function saveSession(session) {
       currentSession = session;
-      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      if (session) localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      else localStorage.removeItem(SESSION_KEY);
       preferences = loadPreferences();
       customers = loadCustomers();
       applyRoleVisibility();
       renderAll();
+    }
+
+    function loadLocalUsers() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(LOCAL_USERS_KEY) || "{}");
+        return defaultLocalUsers.map((user) => ({ ...user, ...(saved[user.account.toLowerCase()] || {}) }));
+      } catch {
+        return defaultLocalUsers;
+      }
+    }
+
+    function saveLocalUser(user) {
+      const saved = JSON.parse(localStorage.getItem(LOCAL_USERS_KEY) || "{}");
+      saved[user.account.toLowerCase()] = {
+        password: user.password,
+        name: user.name,
+        role: user.role
+      };
+      localStorage.setItem(LOCAL_USERS_KEY, JSON.stringify(saved));
+    }
+
+    function localSessionFromUser(user) {
+      return {
+        id: user.id,
+        email: user.account.includes("@") ? user.account : "",
+        account: user.account,
+        name: user.name,
+        role: user.role,
+        token: "",
+        local: true
+      };
+    }
+
+    function signOut() {
+      saveSession(null);
+      $("#loginPassword").value = "";
+      $("#loginStatus").textContent = "";
+      switchScreen("products");
     }
 
     function userStorageKey(baseKey) {
@@ -1220,7 +1267,7 @@
 
     function loadCustomers() {
       try {
-        if (currentSession?.role === "admin" && currentSession?.demo) {
+        if (currentSession?.role === "admin") {
           return loadAllLocalCustomers();
         }
         return JSON.parse(localStorage.getItem(userStorageKey(STORAGE_KEY)) || "[]");
@@ -1402,7 +1449,15 @@
     }
 
     async function signInWithPassword(email, password) {
-      if (!cloudEnabled()) throw new Error("Supabase is not configured. Use a demo role or add config.js.");
+      const account = String(email || "").trim().toLowerCase();
+      const localUser = loadLocalUsers().find((user) => user.account.toLowerCase() === account);
+      if (localUser) {
+        if (localUser.password !== password) throw new Error("Incorrect password. 密码不正确。");
+        saveSession(localSessionFromUser(localUser));
+        return;
+      }
+
+      if (!cloudEnabled()) throw new Error("Account not found. 账号不存在。");
       const response = await fetch(cloudUrl("/auth/v1/token?grant_type=password"), {
         method: "POST",
         headers: cloudHeaders({ Authorization: `Bearer ${cloudConfig.supabaseAnonKey}` }),
@@ -1417,7 +1472,7 @@
         name: profile?.full_name || auth.user.email,
         role: profile?.role || "sales",
         token: auth.access_token,
-        demo: false
+        local: false
       });
       await loadCloudProducts().catch(() => false);
       await loadCloudCustomers().catch(() => false);
@@ -1453,8 +1508,16 @@
       return true;
     }
 
-    async function updateCloudPassword(newPassword) {
-      if (!cloudEnabled() || currentSession?.demo || !currentSession?.token) {
+    async function updatePassword(currentPassword, newPassword) {
+      if (currentSession?.local) {
+        const user = loadLocalUsers().find((item) => item.id === currentSession.id);
+        if (!user) throw new Error("Local account not found.");
+        if (user.password !== currentPassword) throw new Error("Current password is incorrect. 当前密码不正确。");
+        user.password = newPassword;
+        saveLocalUser(user);
+        return true;
+      }
+      if (!cloudEnabled() || !currentSession?.token) {
         throw new Error("Password changes require a signed-in cloud account.");
       }
       const response = await fetch(cloudUrl("/auth/v1/user"), {
@@ -1829,7 +1892,7 @@
             <div>Budget<span>${escapeHtml(customer.budget || "-")}</span></div>
             <div>Status<span>${escapeHtml(customer.followStatus || "-")}</span></div>
             <div>Priority<span>${bilingualInline(customer.priority || "-")}</span></div>
-            ${currentSession.role === "admin" ? `<div>Owner<span>${escapeHtml(customer.ownerName || customer.ownerEmail || customer.ownerId || "Unknown")}</span></div>` : ""}
+            ${currentSession?.role === "admin" ? `<div>Owner<span>${escapeHtml(customer.ownerName || customer.ownerEmail || customer.ownerId || "Unknown")}</span></div>` : ""}
           </div>
           <p><strong>Recommendation:</strong> ${escapeHtml(customer.recommendedSku || "-")} · ${escapeHtml(customer.recommendationEn || "")}<span class="zh-secondary">${escapeHtml(customer.recommendation || "")}</span></p>
           <p class="muted">${escapeHtml(customer.phone || "")} ${customer.email ? " · " + escapeHtml(customer.email) : ""}</p>
@@ -1932,13 +1995,22 @@
     }
 
     function applyRoleVisibility() {
+      const signedIn = Boolean(currentSession);
+      $("#loginScreen").classList.toggle("hidden", signedIn);
+      $("#appShell").classList.toggle("hidden", !signedIn);
+      if (!signedIn) {
+        $$('[data-role-only="admin"]').forEach((item) => item.classList.add("hidden"));
+        $("#sessionLabel").textContent = "Not signed in";
+        $("#logoutBtn").classList.add("hidden");
+        return;
+      }
       const isAdmin = currentSession?.role === "admin";
       $$('[data-role-only="admin"]').forEach((item) => item.classList.toggle("hidden", !isAdmin));
-      $("#sessionLabel").textContent = `${currentSession?.name || currentSession?.email || "Local sales demo"} · ${isAdmin ? "Admin" : "Sales"}`;
-      $("#myAccountSummary").textContent = `${currentSession?.name || currentSession?.email || "Local sales demo"} · ${isAdmin ? "Admin" : "Sales"}${currentSession?.demo ? " · Local demo" : ""}`;
-      $("#logoutBtn").classList.toggle("hidden", Boolean(currentSession?.demo));
-      $("#mySignOutBtn").classList.toggle("hidden", Boolean(currentSession?.demo));
-      $("#loginToggleBtn").textContent = currentSession?.demo ? "Sign In" : "Switch User";
+      const accountName = currentSession?.name || currentSession?.email || currentSession?.account || "Local user";
+      $("#sessionLabel").textContent = `${accountName} · ${isAdmin ? "Admin" : "Sales"}`;
+      $("#myAccountSummary").textContent = `${accountName} · ${isAdmin ? "Admin" : "Sales"}${currentSession?.local ? " · Local account" : ""}`;
+      $("#logoutBtn").classList.remove("hidden");
+      $("#mySignOutBtn").classList.remove("hidden");
       $("#clientsTitle").innerHTML = isAdmin ? 'All Clients<span class="zh-secondary">全部客户</span>' : 'My Clients<span class="zh-secondary">我的客户</span>';
       $("#clientsSubtitle").textContent = isAdmin
         ? "Admins can review all sales reps' clients. 管理员可查看全部销售员客户。"
@@ -2176,29 +2248,15 @@
       $("#saveCustomerBtn").addEventListener("click", saveCustomerFromForm);
       $("#resetFormBtn").addEventListener("click", resetForm);
       ["searchInput", "filterStatus", "filterProfile", "filterBudget"].forEach((id) => $("#" + id).addEventListener("input", renderCustomers));
-      $("#loginToggleBtn").addEventListener("click", () => $("#loginPanel").classList.toggle("hidden"));
-      $("#mySignInBtn").addEventListener("click", () => $("#loginPanel").classList.toggle("hidden"));
-      $("#useDemoSalesBtn").addEventListener("click", () => {
-        saveSession(demoSession("sales"));
-        $("#loginPanel").classList.add("hidden");
-      });
-      $("#useDemoAdminBtn").addEventListener("click", () => {
-        saveSession(demoSession("admin"));
-        $("#loginPanel").classList.add("hidden");
-      });
-      $("#logoutBtn").addEventListener("click", () => {
-        localStorage.removeItem(SESSION_KEY);
-        saveSession(demoSession("sales"));
-      });
-      $("#mySignOutBtn").addEventListener("click", () => {
-        localStorage.removeItem(SESSION_KEY);
-        saveSession(demoSession("sales"));
-      });
+      $("#logoutBtn").addEventListener("click", signOut);
+      $("#mySignOutBtn").addEventListener("click", signOut);
+      ["loginEmail", "loginPassword"].forEach((id) => $("#" + id).addEventListener("keydown", (event) => {
+        if (event.key === "Enter") $("#signInBtn").click();
+      }));
       $("#signInBtn").addEventListener("click", async () => {
         $("#loginStatus").textContent = "Signing in...";
         try {
           await signInWithPassword($("#loginEmail").value.trim(), $("#loginPassword").value);
-          $("#loginPanel").classList.add("hidden");
           $("#loginStatus").textContent = "Signed in.";
         } catch (error) {
           $("#loginStatus").textContent = `Sign in failed: ${error.message}`;
@@ -2212,7 +2270,7 @@
         }
         $("#passwordStatus").textContent = "Updating password...";
         try {
-          await updateCloudPassword(newPassword);
+          await updatePassword($("#currentPassword").value, newPassword);
           $("#currentPassword").value = "";
           $("#newPassword").value = "";
           $("#passwordStatus").textContent = "Password updated. 密码已更新。";
