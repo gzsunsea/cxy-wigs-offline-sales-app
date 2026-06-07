@@ -882,8 +882,8 @@
     <section id="customers" class="screen">
       <div class="section-head">
         <div>
-          <h2>Client List<span class="zh-secondary">客户列表</span></h2>
-          <p class="muted">Search, edit, download profile posters, or filter by status. 搜索、编辑、下载画像海报，或按状态筛选客户。</p>
+          <h2 id="clientsTitle">My Clients<span class="zh-secondary">我的客户</span></h2>
+          <p id="clientsSubtitle" class="muted">Sales users only see their own clients. 销售员只查看自己的客户。</p>
         </div>
         <div class="actions">
           <button class="secondary" data-screen-jump="newCustomer">New Client</button>
@@ -901,8 +901,8 @@
     <section id="reports" class="screen">
       <div class="section-head">
         <div>
-          <h2>Reports<span class="zh-secondary">统计报表</span></h2>
-          <p class="muted">Review offline promotion results: source, budget, profile, status, and high-intent clients. 用于复盘线下推广成果。</p>
+          <h2 id="reportsTitle">My Reports<span class="zh-secondary">我的报表</span></h2>
+          <p id="reportsSubtitle" class="muted">Review your offline promotion results. 复盘自己的线下推广成果。</p>
         </div>
         <div class="actions">
           <button id="exportReportCsvBtn">Export Report CSV</button>
@@ -1151,10 +1151,29 @@
 
     function loadCustomers() {
       try {
+        if (currentSession?.role === "admin" && currentSession?.demo) {
+          return loadAllLocalCustomers();
+        }
         return JSON.parse(localStorage.getItem(userStorageKey(STORAGE_KEY)) || "[]");
       } catch {
         return [];
       }
+    }
+
+    function loadAllLocalCustomers() {
+      const rows = [];
+      for (let index = 0; index < localStorage.length; index += 1) {
+        const key = localStorage.key(index);
+        if (!key?.startsWith(`${STORAGE_KEY}_`)) continue;
+        try {
+          const ownerId = key.replace(`${STORAGE_KEY}_`, "");
+          const ownerRows = JSON.parse(localStorage.getItem(key) || "[]");
+          ownerRows.forEach((row) => rows.push({ ...row, ownerId }));
+        } catch {
+          // Ignore malformed local demo data.
+        }
+      }
+      return rows.sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")));
     }
 
     function saveCustomers() {
@@ -1356,7 +1375,11 @@
         ? "/rest/v1/clients?select=*&order=created_at.desc"
         : `/rest/v1/clients?select=*&owner_id=eq.${encodeURIComponent(currentSession.id)}&order=created_at.desc`;
       const rows = await cloudRequest(path);
-      customers = rows.map((row) => row.payload || row);
+      customers = rows.map((row) => ({
+        ...(row.payload || row),
+        ownerId: row.owner_id,
+        ownerEmail: row.owner_email
+      }));
       saveCustomers();
       return true;
     }
@@ -1713,6 +1736,7 @@
             <div>Budget<span>${escapeHtml(customer.budget || "-")}</span></div>
             <div>Status<span>${escapeHtml(customer.followStatus || "-")}</span></div>
             <div>Priority<span>${bilingualInline(customer.priority || "-")}</span></div>
+            ${currentSession.role === "admin" ? `<div>Owner<span>${escapeHtml(customer.ownerName || customer.ownerEmail || customer.ownerId || "Unknown")}</span></div>` : ""}
           </div>
           <p><strong>Recommendation:</strong> ${escapeHtml(customer.recommendedSku || "-")} · ${escapeHtml(customer.recommendationEn || "")}<span class="zh-secondary">${escapeHtml(customer.recommendation || "")}</span></p>
           <p class="muted">${escapeHtml(customer.phone || "")} ${customer.email ? " · " + escapeHtml(customer.email) : ""}</p>
@@ -1820,6 +1844,14 @@
       $("#sessionLabel").textContent = `${currentSession?.name || currentSession?.email || "Local sales demo"} · ${isAdmin ? "Admin" : "Sales"}`;
       $("#logoutBtn").classList.toggle("hidden", Boolean(currentSession?.demo));
       $("#loginToggleBtn").textContent = currentSession?.demo ? "Sign In" : "Switch User";
+      $("#clientsTitle").innerHTML = isAdmin ? 'All Clients<span class="zh-secondary">全部客户</span>' : 'My Clients<span class="zh-secondary">我的客户</span>';
+      $("#clientsSubtitle").textContent = isAdmin
+        ? "Admins can review all sales reps' clients. 管理员可查看全部销售员客户。"
+        : "Sales users only see their own clients. 销售员只查看自己的客户。";
+      $("#reportsTitle").innerHTML = isAdmin ? 'All Reports<span class="zh-secondary">全部报表</span>' : 'My Reports<span class="zh-secondary">我的报表</span>';
+      $("#reportsSubtitle").textContent = isAdmin
+        ? "Review team-wide offline promotion results. 查看团队整体线下推广成果。"
+        : "Review your offline promotion results. 复盘自己的线下推广成果。";
       if (!isAdmin && $("#admin").classList.contains("active")) switchScreen("products");
       initOptions();
     }
