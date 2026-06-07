@@ -182,6 +182,11 @@
       padding: 7px 10px;
     }
 
+    .nav button[data-screen="products"] {
+      font-size: 15px;
+      font-weight: 860;
+    }
+
     .nav button.active {
       border-color: var(--accent);
       background: #fff;
@@ -704,7 +709,7 @@
         right: 0;
         bottom: 0;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 0;
         border-top: 1px solid var(--line);
         background: #fff;
@@ -715,6 +720,20 @@
         padding: 6px 4px;
         font-size: 11px;
         white-space: normal;
+      }
+
+      .nav:has([data-role-only="admin"]:not(.hidden)) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      .nav button[data-screen="products"] {
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .nav button[data-screen="products"] .zh-secondary {
+        font-size: 12px;
+        font-weight: 760;
       }
       .nav button.active {
         border-color: transparent;
@@ -742,12 +761,12 @@
         </div>
       </div>
       <nav class="nav" aria-label="主导航">
-        <button class="active" data-screen="products">Products<span class="zh-secondary">商品</span></button>
         <button data-screen="newCustomer">New<span class="zh-secondary">新增</span></button>
         <button data-screen="customers">Clients<span class="zh-secondary">客户</span></button>
+        <button class="active" data-screen="products">Products<span class="zh-secondary">商品</span></button>
         <button data-screen="reports">Reports<span class="zh-secondary">报表</span></button>
         <button data-screen="admin" data-role-only="admin">Admin<span class="zh-secondary">后台</span></button>
-        <button data-screen="exports">Export<span class="zh-secondary">导出</span></button>
+        <button data-screen="my">My<span class="zh-secondary">我的</span></button>
       </nav>
       <div class="user-bar">
         <span id="sessionLabel">Local sales demo</span>
@@ -774,52 +793,10 @@
     </section>
 
     <section id="products" class="screen active">
-      <div class="hero-band">
-        <div class="intro-panel">
-          <div>
-            <h2>Start with the customer's need, then match the wig.</h2>
-            <p class="zh-secondary">面对面介绍假发时，先讲需求，再讲产品。</p>
-            <p class="muted">Match wig type, comfort level, budget, and follow-up action in one clear conversation.</p>
-          </div>
-          <div class="pitch-list">
-            <div class="pitch-item">
-              <strong>Natural look</strong>
-              <p>Explain how lace, hairline, color, and density affect realism.</p>
-              <span class="zh-secondary">重点解释 lace、发际线、颜色和密度如何影响真实感。</span>
-            </div>
-            <div class="pitch-item">
-              <strong>Comfort</strong>
-              <p>Compare glueless, headband, cap construction, and long-wear comfort.</p>
-              <span class="zh-secondary">区分无胶、发带、帽底结构和是否适合长时间佩戴。</span>
-            </div>
-            <div class="pitch-item">
-              <strong>Budget</strong>
-              <p>Confirm the price range before recommending human hair, synthetic, or starter options.</p>
-              <span class="zh-secondary">先确认预算，再推荐真人发、化纤或入门款。</span>
-            </div>
-            <div class="pitch-item">
-              <strong>Follow-up</strong>
-              <p>Record key concerns and generate a profile plus next step on-site.</p>
-              <span class="zh-secondary">记录客户关注点，现场生成画像和下一步建议。</span>
-            </div>
-          </div>
-        </div>
-        <div class="privacy-panel">
-          <h3>Privacy Reminder<span class="zh-secondary">敏感信息记录提醒</span></h3>
-          <p>This app can store sensitive fields such as address, hair-loss details, and medical notes. Collect only with consent and protect exported files.</p>
-          <p class="muted">本 APP 可记录地址、脱发原因、医疗相关备注等敏感字段。请只记录客户明确同意提供的信息，并在导出文件时妥善保存。</p>
-          <div class="tag-row">
-            <span class="tag gold">Local only / 本地保存</span>
-            <span class="tag blue">CSV/JSON export / 可导出</span>
-            <span class="tag">Poster PNG / 海报</span>
-          </div>
-        </div>
-      </div>
-
       <div class="section-head">
         <div>
-          <h2>Product Cards<span class="zh-secondary">推荐展示卡</span></h2>
-          <p class="muted">Based on the current Dilisi 2026-05-28 pricing table. 基于当前仓库定价表整理，适合第一版线下介绍。</p>
+          <h2>Products<span class="zh-secondary">商品</span></h2>
+          <p class="muted">Browse shared CXY Wigs product cards, media, pricing, and sales talking points. 浏览统一商品、媒体、价格和销售话术。</p>
         </div>
       </div>
       <div id="productGrid" class="product-grid"></div>
@@ -912,14 +889,91 @@
       <div id="reportGrid" class="report-grid"></div>
     </section>
 
-    <section id="exports" class="screen">
+    <section id="my" class="screen">
       <div class="section-head">
         <div>
-          <h2>Export & Maintenance<span class="zh-secondary">导出与维护</span></h2>
-          <p class="muted">CSV can be opened in Excel; JSON is useful for backup or later system import. CSV 可用 Excel 打开。</p>
+          <h2>My Workspace<span class="zh-secondary">我的</span></h2>
+          <p class="muted">Account, usage guide, preferences, and personal data tools. 账号、使用说明、偏好设置和个人数据工具。</p>
         </div>
       </div>
+
+      <div class="hero-band">
+        <div class="intro-panel">
+          <div>
+            <h2>Usage Guide</h2>
+            <p class="zh-secondary">使用说明</p>
+            <p class="muted">Start with the customer's need, then match the wig type, comfort level, budget, and follow-up action.</p>
+          </div>
+          <div class="pitch-list">
+            <div class="pitch-item">
+              <strong>Natural look</strong>
+              <p>Explain how lace, hairline, color, and density affect realism.</p>
+              <span class="zh-secondary">重点解释 lace、发际线、颜色和密度如何影响真实感。</span>
+            </div>
+            <div class="pitch-item">
+              <strong>Comfort</strong>
+              <p>Compare glueless, headband, cap construction, and long-wear comfort.</p>
+              <span class="zh-secondary">区分无胶、发带、帽底结构和是否适合长时间佩戴。</span>
+            </div>
+            <div class="pitch-item">
+              <strong>Budget</strong>
+              <p>Confirm the price range before recommending human hair, synthetic, or starter options.</p>
+              <span class="zh-secondary">先确认预算，再推荐真人发、化纤或入门款。</span>
+            </div>
+            <div class="pitch-item">
+              <strong>Follow-up</strong>
+              <p>Record key concerns and generate a profile plus next step on-site.</p>
+              <span class="zh-secondary">记录客户关注点，现场生成画像和下一步建议。</span>
+            </div>
+          </div>
+        </div>
+        <div class="privacy-panel">
+          <h3>Privacy Reminder<span class="zh-secondary">敏感信息记录提醒</span></h3>
+          <p>This app can store sensitive fields such as address, hair-loss details, and medical notes. Collect only with consent and protect exported files.</p>
+          <p class="muted">本 APP 可记录地址、脱发原因、医疗相关备注等敏感字段。请只记录客户明确同意提供的信息，并在导出文件时妥善保存。</p>
+          <div class="tag-row">
+            <span class="tag gold">Local only / 本地保存</span>
+            <span class="tag blue">CSV/JSON export / 可导出</span>
+            <span class="tag">Poster PNG / 海报</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <div class="report-panel">
+          <h3>Account<span class="zh-secondary">账号</span></h3>
+          <p id="myAccountSummary" class="muted">Sales Demo · Sales</p>
+          <div class="actions">
+            <button class="secondary" id="mySignInBtn">Sign In / Switch User</button>
+            <button class="secondary" id="mySignOutBtn">Sign Out</button>
+          </div>
+        </div>
+
+        <form class="form-panel">
+          <h3>Password<span class="zh-secondary">修改密码</span></h3>
+          <label><span>Current Password<span class="zh-secondary">当前密码</span></span><input id="currentPassword" type="password" autocomplete="current-password"></label>
+          <label><span>New Password<span class="zh-secondary">新密码</span></span><input id="newPassword" type="password" autocomplete="new-password"></label>
+          <button id="changePasswordBtn" type="button">Update Password</button>
+          <div id="passwordStatus" class="status"></div>
+        </form>
+      </div>
+
+      <div class="form-panel">
+        <h3>Preferences<span class="zh-secondary">使用习惯</span></h3>
+        <div class="form-grid">
+          <label><span>Default City<span class="zh-secondary">默认城市</span></span><input id="prefCity" placeholder="Calgary"></label>
+          <label><span>Default Follow-up Status<span class="zh-secondary">默认跟进状态</span></span><select id="prefStatus"></select></label>
+          <label><span>Language Priority<span class="zh-secondary">语言优先级</span></span><select id="prefLanguage"><option>English first / 英文优先</option><option>Chinese first / 中文优先</option></select></label>
+          <label><span>Poster Style<span class="zh-secondary">海报风格</span></span><select id="prefPoster"><option>Warm Terracotta / 暖陶土</option><option>Clean White / 简洁白</option></select></label>
+        </div>
+        <div class="actions">
+          <button id="savePreferencesBtn" type="button">Save Preferences</button>
+        </div>
+        <div id="preferencesStatus" class="status"></div>
+      </div>
+
       <div class="report-panel">
+        <h3>Data Export<span class="zh-secondary">数据导出</span></h3>
         <div class="actions">
           <button id="exportCustomersCsvBtn">Export Clients CSV</button>
           <button class="secondary" id="exportCustomersJsonBtn">Export Clients JSON</button>
@@ -991,6 +1045,7 @@
     const PRODUCT_STORAGE_KEY = "cxy_offline_sales_products_v1";
     const SYNC_QUEUE_KEY = "cxy_offline_sales_sync_queue_v1";
     const SESSION_KEY = "cxy_offline_sales_session_v1";
+    const PREFERENCES_KEY = "cxy_offline_sales_preferences_v1";
     const cloudConfig = window.CXY_APP_CONFIG || {};
 
     const defaultProducts = [
@@ -1112,6 +1167,7 @@
     ];
 
     let currentSession = loadSession();
+    let preferences = loadPreferences();
     let customers = loadCustomers();
     let currentProfile = null;
 
@@ -1140,6 +1196,7 @@
     function saveSession(session) {
       currentSession = session;
       localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      preferences = loadPreferences();
       customers = loadCustomers();
       applyRoleVisibility();
       renderAll();
@@ -1147,6 +1204,18 @@
 
     function userStorageKey(baseKey) {
       return `${baseKey}_${currentSession?.id || "anonymous"}`;
+    }
+
+    function loadPreferences() {
+      try {
+        return JSON.parse(localStorage.getItem(userStorageKey(PREFERENCES_KEY)) || "{}");
+      } catch {
+        return {};
+      }
+    }
+
+    function savePreferences() {
+      localStorage.setItem(userStorageKey(PREFERENCES_KEY), JSON.stringify(preferences));
     }
 
     function loadCustomers() {
@@ -1384,6 +1453,19 @@
       return true;
     }
 
+    async function updateCloudPassword(newPassword) {
+      if (!cloudEnabled() || currentSession?.demo || !currentSession?.token) {
+        throw new Error("Password changes require a signed-in cloud account.");
+      }
+      const response = await fetch(cloudUrl("/auth/v1/user"), {
+        method: "PUT",
+        headers: cloudHeaders(),
+        body: JSON.stringify({ password: newPassword })
+      });
+      if (!response.ok) throw new Error(await response.text());
+      return response.json();
+    }
+
     function queueSync(item) {
       try {
         const queue = JSON.parse(localStorage.getItem(SYNC_QUEUE_KEY) || "[]");
@@ -1452,6 +1534,7 @@
 
     function initOptions() {
       Object.entries(optionSets).forEach(([id, values]) => populateSelect(id, values));
+      populateSelect("prefStatus", optionSets.followStatus.filter(Boolean));
       const skuSelect = $("#recommendedSku");
       skuSelect.innerHTML = '<option value="">Auto recommend / 自动推荐</option>';
       products.forEach((product) => skuSelect.appendChild(new Option(`${product.sku} - ${product.en}`, product.sku)));
@@ -1470,6 +1553,7 @@
       $("#concernChecks").innerHTML = concerns.map((concern, index) => `
         <label class="check"><input type="checkbox" name="concerns" value="${escapeHtml(concern)}" ${index < 2 ? "" : ""}>${escapeHtml(concern)}</label>
       `).join("");
+      renderPreferencesForm();
     }
 
     function renderProducts() {
@@ -1536,10 +1620,19 @@
     function resetForm() {
       $("#customerForm").reset();
       $("#customerId").value = "";
-      $("#followStatus").value = "New / 新客户";
+      $("#city").value = preferences.defaultCity || "";
+      $("#followStatus").value = preferences.defaultStatus || "New / 新客户";
       currentProfile = null;
       updateProfilePreview();
       $("#formStatus").textContent = "";
+    }
+
+    function renderPreferencesForm() {
+      if (!$("#prefCity")) return;
+      $("#prefCity").value = preferences.defaultCity || "";
+      $("#prefStatus").value = preferences.defaultStatus || "New / 新客户";
+      $("#prefLanguage").value = preferences.languagePriority || "English first / 英文优先";
+      $("#prefPoster").value = preferences.posterStyle || "Warm Terracotta / 暖陶土";
     }
 
     function inferProfile(data) {
@@ -1842,7 +1935,9 @@
       const isAdmin = currentSession?.role === "admin";
       $$('[data-role-only="admin"]').forEach((item) => item.classList.toggle("hidden", !isAdmin));
       $("#sessionLabel").textContent = `${currentSession?.name || currentSession?.email || "Local sales demo"} · ${isAdmin ? "Admin" : "Sales"}`;
+      $("#myAccountSummary").textContent = `${currentSession?.name || currentSession?.email || "Local sales demo"} · ${isAdmin ? "Admin" : "Sales"}${currentSession?.demo ? " · Local demo" : ""}`;
       $("#logoutBtn").classList.toggle("hidden", Boolean(currentSession?.demo));
+      $("#mySignOutBtn").classList.toggle("hidden", Boolean(currentSession?.demo));
       $("#loginToggleBtn").textContent = currentSession?.demo ? "Sign In" : "Switch User";
       $("#clientsTitle").innerHTML = isAdmin ? 'All Clients<span class="zh-secondary">全部客户</span>' : 'My Clients<span class="zh-secondary">我的客户</span>';
       $("#clientsSubtitle").textContent = isAdmin
@@ -2082,6 +2177,7 @@
       $("#resetFormBtn").addEventListener("click", resetForm);
       ["searchInput", "filterStatus", "filterProfile", "filterBudget"].forEach((id) => $("#" + id).addEventListener("input", renderCustomers));
       $("#loginToggleBtn").addEventListener("click", () => $("#loginPanel").classList.toggle("hidden"));
+      $("#mySignInBtn").addEventListener("click", () => $("#loginPanel").classList.toggle("hidden"));
       $("#useDemoSalesBtn").addEventListener("click", () => {
         saveSession(demoSession("sales"));
         $("#loginPanel").classList.add("hidden");
@@ -2094,6 +2190,10 @@
         localStorage.removeItem(SESSION_KEY);
         saveSession(demoSession("sales"));
       });
+      $("#mySignOutBtn").addEventListener("click", () => {
+        localStorage.removeItem(SESSION_KEY);
+        saveSession(demoSession("sales"));
+      });
       $("#signInBtn").addEventListener("click", async () => {
         $("#loginStatus").textContent = "Signing in...";
         try {
@@ -2103,6 +2203,33 @@
         } catch (error) {
           $("#loginStatus").textContent = `Sign in failed: ${error.message}`;
         }
+      });
+      $("#changePasswordBtn").addEventListener("click", async () => {
+        const newPassword = $("#newPassword").value;
+        if (newPassword.length < 8) {
+          $("#passwordStatus").textContent = "Use at least 8 characters. 新密码至少 8 位。";
+          return;
+        }
+        $("#passwordStatus").textContent = "Updating password...";
+        try {
+          await updateCloudPassword(newPassword);
+          $("#currentPassword").value = "";
+          $("#newPassword").value = "";
+          $("#passwordStatus").textContent = "Password updated. 密码已更新。";
+        } catch (error) {
+          $("#passwordStatus").textContent = `Password update unavailable: ${error.message}`;
+        }
+      });
+      $("#savePreferencesBtn").addEventListener("click", () => {
+        preferences = {
+          defaultCity: $("#prefCity").value.trim(),
+          defaultStatus: $("#prefStatus").value || "New / 新客户",
+          languagePriority: $("#prefLanguage").value,
+          posterStyle: $("#prefPoster").value
+        };
+        savePreferences();
+        $("#preferencesStatus").textContent = "Preferences saved. 使用习惯已保存。";
+        resetForm();
       });
 
       $("#customerList").addEventListener("click", (event) => {
