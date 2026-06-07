@@ -572,6 +572,16 @@
       font-weight: 840;
     }
 
+    .form-mode {
+      display: flex;
+      gap: 12px;
+      align-items: start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
     .span-2 { grid-column: span 2; }
     .span-4 { grid-column: span 4; }
 
@@ -1190,6 +1200,13 @@
       <div class="admin-grid">
         <form id="productForm" class="form-panel">
           <input type="hidden" id="productId">
+          <div class="form-mode">
+            <div>
+              <h3 id="productFormTitle">New Product<span class="zh-secondary">新增商品</span></h3>
+              <p id="productFormHint" class="muted">Create a product or choose Edit from the product list. 可新增商品，或在商品列表点击 Edit 编辑。</p>
+            </div>
+            <button class="secondary hidden" id="cancelProductEditBtn" type="button">Cancel Edit</button>
+          </div>
           <div class="form-grid">
             <label><span>SKU<span class="zh-secondary">商品编号</span></span><input id="productSku" placeholder="DILISI-20260528-001"></label>
             <label><span>Sort Order<span class="zh-secondary">排序</span></span><input id="productSort" type="number" min="0" step="1" placeholder="10"></label>
@@ -2345,6 +2362,31 @@
       $("#productTalkZh").value = item.talk || "";
     }
 
+    function resetProductFormMode() {
+      setProductForm({});
+      $("#productFormTitle").innerHTML = 'New Product<span class="zh-secondary">新增商品</span>';
+      $("#productFormHint").textContent = "Create a product or choose Edit from the product list. 可新增商品，或在商品列表点击 Edit 编辑。";
+      $("#saveProductBtn").textContent = "Save Product";
+      $("#cancelProductEditBtn").classList.add("hidden");
+      $("#productAdminStatus").textContent = "";
+    }
+
+    function startProductEdit(productId) {
+      const product = products.find((item) => item.id === productId);
+      if (!product) {
+        $("#productAdminStatus").textContent = "Product not found. 商品不存在。";
+        return;
+      }
+      setProductForm(product);
+      $("#productFormTitle").innerHTML = `Editing Product<span class="zh-secondary">正在编辑商品</span>`;
+      $("#productFormHint").textContent = `${product.sku || product.id} · ${product.en || product.zh || "Unnamed product"}`;
+      $("#saveProductBtn").textContent = "Update Product";
+      $("#cancelProductEditBtn").classList.remove("hidden");
+      $("#productAdminStatus").textContent = "Editing mode active. 修改后点击 Update Product 保存。";
+      $("#productForm").scrollIntoView({ behavior: "smooth", block: "start" });
+      window.setTimeout(() => $("#productNameEn").focus(), 250);
+    }
+
     function renderAdminProducts() {
       const list = $("#adminProductList");
       if (!list) return;
@@ -2634,7 +2676,11 @@
           $("#exportStatus").textContent = "Local client records cleared. 本地客户数据已清空。";
         }
       });
-      $("#newProductBtn").addEventListener("click", () => setProductForm({}));
+      $("#newProductBtn").addEventListener("click", () => {
+        resetProductFormMode();
+        $("#productForm").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      $("#cancelProductEditBtn").addEventListener("click", resetProductFormMode);
       $("#reloadCloudBtn").addEventListener("click", async () => {
         $("#productAdminStatus").textContent = "Loading cloud products...";
         try {
@@ -2650,6 +2696,7 @@
           $("#productAdminStatus").textContent = "Admin role required.";
           return;
         }
+        const wasEditing = Boolean($("#productId").value);
         const product = productFormData();
         if (!product.sku || !product.en) {
           $("#productAdminStatus").textContent = "SKU and English name are required.";
@@ -2660,14 +2707,19 @@
         else products.push(product);
         products.sort((a, b) => Number(a.sortOrder || 999) - Number(b.sortOrder || 999));
         saveLocalProducts();
+        let statusText = "";
         try {
           await saveCloudProduct(product);
-          $("#productAdminStatus").textContent = cloudEnabled() ? "Product saved to cloud." : "Product saved locally.";
+          statusText = wasEditing
+            ? (cloudEnabled() ? "Product updated in cloud. 商品已更新到云端。" : "Product updated locally. 商品已本地更新。")
+            : (cloudEnabled() ? "Product saved to cloud. 商品已保存到云端。" : "Product saved locally. 商品已本地保存。");
         } catch (error) {
-          $("#productAdminStatus").textContent = `Saved locally. Cloud failed: ${error.message}`;
+          statusText = `Saved locally. Cloud failed: ${error.message}`;
         }
         initOptions();
         renderAll();
+        resetProductFormMode();
+        $("#productAdminStatus").textContent = statusText;
       });
       $("#exportProductsBtn").addEventListener("click", () => {
         downloadFile(filename("cxy_products", "json"), JSON.stringify(products, null, 2), "application/json");
@@ -2677,8 +2729,7 @@
         const toggleId = event.target.dataset.productToggle;
         const deleteId = event.target.dataset.productDelete;
         if (editId) {
-          const product = products.find((item) => item.id === editId);
-          if (product) setProductForm(product);
+          startProductEdit(editId);
         }
         if (toggleId) {
           const product = products.find((item) => item.id === toggleId);
