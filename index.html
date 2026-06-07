@@ -23,6 +23,7 @@
       --warn: #faad14;
       --shadow: 0 2px 8px rgba(198, 124, 92, .08);
       --shadow-strong: 0 8px 24px rgba(198, 124, 92, .16);
+      --radius: 12px;
     }
 
     * { box-sizing: border-box; }
@@ -33,7 +34,8 @@
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
-      background: #fff;
+      background:
+        linear-gradient(180deg, #fff 0%, #faf8f5 42%, #fff 100%);
       line-height: 1.45;
     }
 
@@ -45,17 +47,19 @@
       min-height: 40px;
       border: 1px solid var(--accent);
       border-radius: 12px;
-      padding: 8px 13px;
+      padding: 9px 16px;
       background: var(--accent);
       color: #fff;
       cursor: pointer;
-      font-weight: 760;
+      font-weight: 800;
       white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(198, 124, 92, .14);
     }
 
     button.secondary {
       background: #fff;
       color: var(--accent-dark);
+      box-shadow: none;
     }
 
     button.warning {
@@ -75,9 +79,15 @@
       min-height: 40px;
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 9px 10px;
+      padding: 10px 12px;
       background: #f5f3f0;
       color: var(--ink);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid rgba(198, 124, 92, .22);
+      border-color: var(--accent);
+      background: #fff;
     }
 
     textarea {
@@ -130,14 +140,16 @@
       display: grid;
       place-items: center;
       padding: 24px;
-      background: linear-gradient(180deg, #fff 0%, #faf8f5 100%);
+      background:
+        radial-gradient(circle at 50% 12%, rgba(212, 175, 106, .18), transparent 32%),
+        linear-gradient(180deg, #fff 0%, #faf8f5 100%);
     }
 
     .login-card {
       width: min(100%, 520px);
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 26px;
+      padding: 28px;
       background: #fff;
       box-shadow: var(--shadow-strong);
     }
@@ -151,8 +163,8 @@
 
     .brand-logo {
       display: block;
-      width: 156px;
-      height: 78px;
+      width: 136px;
+      height: 68px;
       object-fit: contain;
     }
 
@@ -172,7 +184,7 @@
     .login-form {
       display: grid;
       gap: 14px;
-      margin-top: 22px;
+      margin-top: 24px;
     }
 
     .nav {
@@ -188,6 +200,7 @@
       background: transparent;
       color: var(--muted);
       padding: 7px 10px;
+      box-shadow: none;
     }
 
     .nav button[data-screen="products"] {
@@ -199,7 +212,7 @@
       border-color: var(--accent);
       background: #fff;
       color: var(--accent-dark);
-      box-shadow: 0 6px 18px rgba(13, 107, 87, .12);
+      box-shadow: 0 4px 14px rgba(198, 124, 92, .12);
     }
 
     .user-bar {
@@ -228,6 +241,7 @@
       border-top: 1px solid var(--line);
       background: rgba(255, 255, 255, .96);
       backdrop-filter: blur(12px);
+      box-shadow: 0 -8px 24px rgba(44, 44, 44, .06);
     }
 
     .app-tabbar .nav {
@@ -235,6 +249,7 @@
       margin: 0 auto;
       padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
       justify-content: center;
+      gap: 4px;
     }
 
     .app-tabbar .user-bar {
@@ -244,7 +259,7 @@
     main {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 22px 26px 42px;
+      padding: 28px 26px 52px;
     }
 
     .screen { display: none; }
@@ -259,12 +274,14 @@
       align-items: end;
       justify-content: space-between;
       flex-wrap: wrap;
+      padding: 4px 0 2px;
     }
 
     h2 {
       margin: 0;
-      font-size: 22px;
+      font-size: 25px;
       letter-spacing: 0;
+      line-height: 1.18;
     }
 
     h3 {
@@ -282,6 +299,14 @@
       gap: 10px;
       align-items: center;
       flex-wrap: wrap;
+    }
+
+    .product-card .actions {
+      margin-top: 2px;
+    }
+
+    .product-card .actions button {
+      width: 100%;
     }
 
     .hero-band {
@@ -344,7 +369,7 @@
     .product-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      gap: 18px;
     }
 
     .product-card, .customer-card, .metric, .report-card {
@@ -356,17 +381,26 @@
 
     .product-card {
       display: grid;
-      gap: 12px;
-      padding: 15px;
+      gap: 13px;
+      padding: 14px;
+      align-content: start;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(198, 124, 92, .34);
+      box-shadow: var(--shadow-strong);
     }
 
     .product-media {
       position: relative;
       display: grid;
-      min-height: 190px;
+      aspect-ratio: 4 / 3;
+      min-height: 210px;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 12px;
       background:
         linear-gradient(135deg, rgba(198, 124, 92, .92), rgba(184, 133, 106, .86)),
         #c67c5c;
@@ -376,7 +410,7 @@
     .product-media video {
       width: 100%;
       height: 100%;
-      min-height: 190px;
+      min-height: 210px;
       object-fit: cover;
       display: block;
     }
@@ -384,7 +418,7 @@
     .media-placeholder {
       display: grid;
       place-items: center;
-      min-height: 190px;
+      min-height: 210px;
       padding: 20px;
       color: #fff;
       text-align: center;
@@ -442,11 +476,14 @@
 
     .product-detail {
       display: grid;
-      gap: 16px;
+      gap: 18px;
+      max-width: 1040px;
+      margin: 0 auto;
     }
 
     .product-detail .product-media {
-      min-height: min(58vh, 520px);
+      min-height: min(58vh, 540px);
+      border-radius: 16px;
     }
 
     .product-detail .product-media img,
@@ -469,7 +506,7 @@
       border-radius: 999px;
       padding: 3px 8px;
       color: #32443d;
-      background: #f7fbf9;
+      background: #fffaf5;
       font-size: 12px;
       font-weight: 760;
     }
@@ -488,14 +525,15 @@
 
     .price {
       color: var(--accent-dark);
-      font-size: 20px;
-      font-weight: 840;
+      font-size: 21px;
+      font-weight: 880;
     }
 
     .product-card ul {
       margin: 0;
       padding-left: 18px;
       color: var(--muted);
+      font-size: 14px;
     }
 
     .form-grid {
@@ -505,6 +543,15 @@
       align-items: start;
     }
 
+    .form-group-title {
+      margin: 2px 0 -2px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 840;
+    }
+
     .span-2 { grid-column: span 2; }
     .span-4 { grid-column: span 4; }
 
@@ -512,9 +559,10 @@
       display: grid;
       gap: 16px;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: var(--radius);
       padding: 18px;
-      background: var(--panel);
+      background: #fff;
+      box-shadow: var(--shadow);
     }
 
     .checkbox-grid {
@@ -529,7 +577,7 @@
       align-items: center;
       min-height: 38px;
       border: 1px solid var(--line);
-      border-radius: 6px;
+      border-radius: 8px;
       padding: 8px 10px;
       background: #fff;
       color: var(--ink);
@@ -546,8 +594,9 @@
     .profile-panel {
       display: grid;
       gap: 12px;
-      background: #f7fbff;
+      background: linear-gradient(180deg, #fff 0%, #f7fbff 100%);
       border-color: #c8d7ef;
+      border-radius: var(--radius);
     }
 
     .profile-title {
@@ -563,8 +612,8 @@
       place-items: center;
       width: 54px;
       height: 54px;
-      border-radius: 8px;
-      background: var(--blue);
+      border-radius: 12px;
+      background: var(--accent);
       color: #fff;
       font-size: 22px;
       font-weight: 860;
@@ -579,7 +628,7 @@
     .profile-chip {
       min-height: 70px;
       border: 1px solid #c8d7ef;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 10px;
       background: #fff;
     }
@@ -755,9 +804,10 @@
     .hidden { display: none !important; }
 
     @media (max-width: 980px) {
-      main { padding: 18px 18px 96px; }
+      main { padding: 20px 18px 96px; }
       .nav { width: 100%; justify-content: start; }
-      .hero-band, .product-grid, .customer-grid, .report-grid, .admin-grid { grid-template-columns: 1fr; }
+      .hero-band, .customer-grid, .report-grid, .admin-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .span-4 { grid-column: span 2; }
       .checkbox-grid, .metrics, .profile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -770,6 +820,7 @@
       .brand-logo { width: 118px; height: 58px; }
       .login-screen { padding: 18px; }
       .login-card { padding: 20px; }
+      .brand { align-items: flex-start; }
       .nav {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -799,11 +850,15 @@
       .nav button.active {
         border-color: transparent;
         border-top: 3px solid var(--accent);
+        background: #fffaf7;
         box-shadow: none;
       }
-      .pitch-list, .form-grid, .checkbox-grid, .metrics, .profile-grid, .toolbar, .mini {
+      .product-grid, .pitch-list, .form-grid, .checkbox-grid, .metrics, .profile-grid, .toolbar, .mini {
         grid-template-columns: 1fr;
       }
+      .product-card { padding: 12px; }
+      .product-media { min-height: 240px; }
+      .product-media img, .product-media video, .media-placeholder { min-height: 240px; }
       .span-2, .span-4 { grid-column: span 1; }
       .section-head { align-items: start; }
       .actions button { flex: 1 1 130px; }
@@ -861,6 +916,7 @@
 
       <form id="customerForm" class="form-panel">
         <input type="hidden" id="customerId">
+        <h3 class="form-group-title">Basic Info<span class="zh-secondary">基本信息</span></h3>
         <div class="form-grid">
           <label><span>Name<span class="zh-secondary">姓名/昵称</span></span><input id="name" autocomplete="name" placeholder="Lisa / Ms. Wang"></label>
           <label><span>Phone<span class="zh-secondary">电话</span></span><input id="phone" autocomplete="tel" placeholder="+1 ..."></label>
@@ -871,7 +927,10 @@
           <label><span>Pronoun / Gender<span class="zh-secondary">称呼/性别</span></span><select id="gender"></select></label>
           <label><span>Budget<span class="zh-secondary">预算</span></span><select id="budget"></select></label>
           <label><span>Status<span class="zh-secondary">跟进状态</span></span><select id="followStatus"></select></label>
+        </div>
 
+        <h3 class="form-group-title">Needs & Preference<span class="zh-secondary">需求与偏好</span></h3>
+        <div class="form-grid">
           <label><span>Purpose<span class="zh-secondary">购买目的</span></span><select id="purpose"></select></label>
           <label><span>Experience<span class="zh-secondary">佩戴经验</span></span><select id="experience"></select></label>
           <label><span>Preferred Length<span class="zh-secondary">偏好长度</span></span><select id="lengthPreference"></select></label>
@@ -879,6 +938,10 @@
 
           <label><span>Preferred Color<span class="zh-secondary">偏好颜色</span></span><input id="colorPreference" placeholder="Natural black / dark brown"></label>
           <label><span>Recommended SKU<span class="zh-secondary">推荐 SKU</span></span><select id="recommendedSku"></select></label>
+        </div>
+
+        <h3 class="form-group-title">Sensitive Notes<span class="zh-secondary">敏感信息</span></h3>
+        <div class="form-grid">
           <label class="span-2"><span>Address<span class="zh-secondary">地址</span></span><input id="address" autocomplete="street-address" placeholder="Sensitive / optional"></label>
 
           <label class="span-2"><span>Hair-loss or Medical Reason<span class="zh-secondary">脱发/医疗原因</span></span><textarea id="sensitiveReason" placeholder="Sensitive / optional. Chemotherapy, alopecia, thinning hair..."></textarea></label>
