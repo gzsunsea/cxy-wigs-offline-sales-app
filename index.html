@@ -1896,7 +1896,7 @@
   <script src="config.js"></script>
   <script>
     const STORAGE_KEY = "cxy_offline_sales_clients_v1";
-    const PRODUCT_STORAGE_KEY = "cxy_offline_sales_products_v1";
+    const PRODUCT_STORAGE_KEY = "cxy_offline_sales_products_v2";
     const SYNC_QUEUE_KEY = "cxy_offline_sales_sync_queue_v1";
     const SESSION_KEY = "cxy_offline_sales_session_v1";
     const PREFERENCES_KEY = "cxy_offline_sales_preferences_v1";
@@ -1910,90 +1910,505 @@
     ];
 
     const defaultProducts = [
-      {
-        sku: "DILISI-20260528-001",
-        zh: "13x4 HD 250% Bob",
-        en: "13x4 HD 250% Bob Wig",
-        type: "Human hair / 真人发",
-        inch: "12 inch",
-        style: "st 1b bob",
-        price: "C$349-399 Calgary",
-        fit: "适合追求自然发际线、短发通勤和高品质入门客户。",
-        fitEn: "Best for natural hairline, everyday bob styling, and premium first try.",
-        talk: "HD lace 和 250% 密度更适合想要自然但有发量的客户。",
-        talkEn: "HD lace and 250% density work well for clients who want a natural but full look.",
-        tags: ["HD lace", "250% density", "Premium"]
-      },
-      {
-        sku: "DILISI-20260528-003",
-        zh: "2x4 Bob 10A",
-        en: "2x4 10A Bob Wig",
-        type: "Human hair / 真人发",
-        inch: "10-12 inch",
-        style: "st 1b / #1b30",
-        price: "C$119-199 Calgary",
-        fit: "适合预算中等、想要易打理短发的首次购买者。",
-        fitEn: "Good for mid-budget first-time buyers who want an easy bob.",
-        talk: "结构更简单，价格更友好，适合先体验真人发质感。",
-        talkEn: "A simpler structure and friendlier price make it a good first human-hair experience.",
-        tags: ["Starter", "Bob", "Value"]
-      },
-      {
-        sku: "DILISI-20260528-007",
-        zh: "180% Headband Wig",
-        en: "180% Headband Wig",
-        type: "Human hair / 真人发",
-        inch: "22 inch",
-        style: "kc / kkst",
-        price: "C$299-349 Calgary",
-        fit: "适合重视佩戴速度、舒适度和日常自然造型的客户。",
-        fitEn: "Best for quick wear, comfort, and casual everyday looks.",
-        talk: "发带款不用处理 lace，上手快，适合忙碌客户。",
-        talkEn: "The headband design avoids lace work and is easy for busy clients to wear.",
-        tags: ["Glueless", "Comfort", "Daily"]
-      },
-      {
-        sku: "DILISI-20260528-009",
-        zh: "13x4 180% Glueless Wig",
-        en: "13x4 180% Glueless Wig",
-        type: "Human hair / 真人发",
-        inch: "22 inch",
-        style: "body wave",
-        price: "C$349-399 Calgary",
-        fit: "适合想要长发、自然 lace、无胶佩戴体验的客户。",
-        fitEn: "Best for long-hair clients who want lace-front natural styling.",
-        talk: "13x4 lace 可做更多分缝和发际线造型，180% 密度更日常。",
-        talkEn: "13x4 lace supports more parting and hairline styling, while 180% density stays practical.",
-        tags: ["13x4", "Glueless", "Body wave"]
-      },
-      {
-        sku: "DILISI-20260528-010",
-        zh: "Synthetic Headband Wig",
-        en: "Synthetic Headband Wig",
-        type: "Synthetic / 化纤",
-        inch: "24 inch",
-        style: "kc / kkst",
-        price: "C$59-89 Calgary",
-        fit: "适合预算敏感、派对造型或想先试戴的新客户。",
-        fitEn: "Best for budget-conscious clients, events, or first try-ons.",
-        talk: "价格低、造型感强，但耐用度和自然度要提前说明。",
-        talkEn: "Lower cost and strong styling impact, with clear expectations on durability and realism.",
-        tags: ["Budget", "Try-on", "Synthetic"]
-      },
-      {
-        sku: "DILISI-20260528-013",
-        zh: "假发支架",
-        en: "Wig Stand",
-        type: "Accessory / 配件",
-        inch: "One size",
-        style: "stand",
-        price: "C$5-10",
-        fit: "适合搭配所有假发，帮助客户存放、晾干和护理。",
-        fitEn: "Useful add-on for storage, drying, and daily wig care.",
-        talk: "推荐作为基础护理配件，提高复购和使用体验。",
-        talkEn: "A basic care add-on that improves storage, drying, and everyday use.",
-        tags: ["Care", "Add-on", "Accessory"]
-      }
+          {
+                "id": "shopify-8627595477188",
+                "sku": "SHOPIFY-8627595477188",
+                "zh": "Shopify 化纤假发商品",
+                "en": "Front Lace Chemical Fiber Long Curly Hair European And American Wig Headgear",
+                "type": "Synthetic wig / 化纤假发",
+                "inch": "Multiple options",
+                "style": "curly / lace front",
+                "price": "C$59-249",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1619073767243.jpg?v=1782229965",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1619073767234.jpg?v=1782229965",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1619073767529.jpg?v=1782229965",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1619073767235.jpg?v=1782229965",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1619073767528.jpg?v=1782229965",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/a95edd58-13a1-4f00-aa30-e13be4f62ce3.jpg?v=1782229965",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1619073767245.jpg?v=1782229965",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1619073767244.jpg?v=1782229965",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1619073767242.jpg?v=1782229965"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product Information: Applicable people: General Treatment process: mechanism Whether it can be dyed or hot: Do not dye it Hair material: Cassia/Kani Karen Applicable skin color: Any skin color Applicable face shape:Any face shape Bang type: Can be slanted S...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/front-lace-chemical-fiber-long-curly-hair-european-and-american-wig-headgear",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/front-lace-chemical-fiber-long-curly-hair-european-and-american-wig-headgear",
+                "tags": [
+                      "Shopify",
+                      "Synthetic",
+                      "Lace front",
+                      "Curly"
+                ],
+                "visible": true,
+                "sortOrder": 1
+          },
+          {
+                "id": "shopify-8627586564292",
+                "sku": "SHOPIFY-8627586564292",
+                "zh": "Shopify 真人发假发商品",
+                "en": "Full Mechanism Human Hair Wig Headgear",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "10-30 inch",
+                "style": "Shopify style",
+                "price": "C$99-699",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/10fd8a5b-bab1-4321-b981-8b761db25397.jpg?v=1782229783",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/7fa617c6-2367-4cc4-a9a8-a187c2043000.jpg?v=1782229783",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/7cc2bf42-176c-4bb3-8c8d-519e8ea68244.jpg?v=1782229783",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/041dfd10-ed0d-4732-b28f-c46cc941b427.jpg?v=1782229784",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/55064570-392a-4f8d-b297-95866c277173.jpg?v=1782229783",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/cccbed43-f6fb-4d3f-9822-f0c0188863b5.jpg?v=1782229783"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information: Color: # Various colors Hair Material: Human Hair Effect: Increase hair volume and thicken wigs Length: 10-30Inch Weight: 130% 150% 180% density Material: 100% Human Hair Packing list: Actor's headgear*1",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/full-mechanism-human-hair-wig-headgear",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/full-mechanism-human-hair-wig-headgear",
+                "tags": [
+                      "Shopify",
+                      "Human hair"
+                ],
+                "visible": true,
+                "sortOrder": 2
+          },
+          {
+                "id": "shopify-8627432882372",
+                "sku": "SHOPIFY-8627432882372",
+                "zh": "Shopify 真人发假发商品",
+                "en": "613 Blonde Bob Wig Short Straight Human Hair Wigs For Women",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "8-16 inch",
+                "style": "straight / bob / 613 blonde",
+                "price": "C$219-1099",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/00e3e2c6-7b03-492a-84e6-cedfd5191208.jpg?v=1782227116",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/95d415c8-19fe-401e-adb9-326da1b5d484.jpg?v=1782227116",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/2532f7a4-58d4-40d1-a849-093419a4f10f.jpg?v=1782227117",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/5a3fe44d-bd1c-4c88-9eb7-9b66bff765a6.jpg?v=1782227116",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/028832cc-4c5f-49bd-885b-cf6be035112e.jpg?v=1782227116",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/f50dd5ba-4a6c-4735-982e-7b4060fbc1b6.jpg?v=1782227116",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/defee4df-0b84-4af1-9bf4-e2721ac0c48c.jpg?v=1782227116",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/49a99046-aba8-4fc5-b372-ffd33010eb6e.jpg?v=1782227116",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/6a2a7156-a817-404e-a287-bfddc4d98fc5.jpg?v=1782227116",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/2dc39397-cdf3-4b68-96ec-7666424d780b.jpg?v=1782227116"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information : Color: 8 inch bob wig+130 density t par 8 inch bob wig+180 density t par 10 inch bob wig+130 density t pa 10 inch bob wig+180 density t pa 12 inch bob wig+130den sity T Pa 12inch Bob Wig+180Density T Pa 14inch Bob Wig+130Density T Pa 1...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/613-blonde-bob-wig-short-straight-human-hair-wigs-for-women",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/613-blonde-bob-wig-short-straight-human-hair-wigs-for-women",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Straight",
+                      "Bob",
+                      "Color option"
+                ],
+                "visible": true,
+                "sortOrder": 3
+          },
+          {
+                "id": "shopify-8627431997636",
+                "sku": "SHOPIFY-8627431997636",
+                "zh": "Shopify 蕾丝真人发假发",
+                "en": "Honey Blonde Body Wave Lace Front Pre Plucked Highlight Wig",
+                "type": "Wig / 假发",
+                "inch": "8-30 inch",
+                "style": "body wave / lace front / honey blonde / highlight",
+                "price": "C$338.34-1014.48",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/7062c436-4026-420e-8535-a0e72468eda9.jpg?v=1782227099",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/88a65e30-1dc7-4895-bfab-c646568bfb8a.jpg?v=1782227099",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/5f9a3313-d86f-4370-81e4-0d396baceea7.jpg?v=1782227099",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/2c276630-21fd-46a6-a16e-8cff3248ba34.jpg?v=1782227099",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/628cee1c-a9c1-4aa2-9595-55e89c92230b.jpg?v=1782227099"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information: Treatment Process: Mechanism Color: 13x 6 headdress Hair material: Human hair Applicable skin color: any skin color Color classification: 8 inches 180% density, 10 inches 180% density, 12 inches 180% density, 14 inches 180% density, 16...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/honey-blonde-body-wave-lace-front-pre-plucked-highlight-wig",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/honey-blonde-body-wave-lace-front-pre-plucked-highlight-wig",
+                "tags": [
+                      "Shopify",
+                      "Lace front",
+                      "Body wave",
+                      "Color option"
+                ],
+                "visible": true,
+                "sortOrder": 4
+          },
+          {
+                "id": "shopify-8627430981828",
+                "sku": "SHOPIFY-8627430981828",
+                "zh": "Shopify 真人发假发商品",
+                "en": "Glueless Wig Human Hair Straight Wig",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "10-30 inch",
+                "style": "straight / glueless",
+                "price": "C$149.51-1069.37",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/bc3cdca3-4fc0-4433-9b49-0b4b3e3c25cf.jpg?v=1782227087",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/d095a865-4810-4bb2-968d-07f5d88048cb.jpg?v=1782227087",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/b7aec182-7865-42df-9856-f60581b26d05.jpg?v=1782227087",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/33a74cf9-fa0d-434b-a05d-09f60539d26f.jpg?v=1782227087",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1791d15f-1a0a-4af1-bf17-4eb25a1d4389.jpg?v=1782227087"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information: Treatment Process: hand-woven Efficacy: Beautiful Color: density 150%, density 180%, density 210% Applicable face type: any face type Wig style: long straight hair can be flat, but side bangs Applicable people: Ladies Hair material: Hum...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/glueless-wig-human-hair-straight-wig",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/glueless-wig-human-hair-straight-wig",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Glueless",
+                      "Straight"
+                ],
+                "visible": true,
+                "sortOrder": 5
+          },
+          {
+                "id": "shopify-8627429376196",
+                "sku": "SHOPIFY-8627429376196",
+                "zh": "Shopify 真人发假发商品",
+                "en": "Brown Color Human Hair Wigs Human Hair Wig",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "8-30 inch",
+                "style": "brown",
+                "price": "C$1240.83-4945.85",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/bf9c4aaf-0c0c-4815-a3f6-24b9c9078abe.jpg?v=1782227074",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/d850f0d6-ff99-4e74-ae11-6d01c866e093.jpg?v=1782227074",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/d19e3a02-612a-47ee-898c-81e6e2cd217f.jpg?v=1782227074",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/bd4e7e31-6f3d-4497-8437-dfcc05f4a9c2.jpg?v=1782227073",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/baada14a-6262-4d2c-9af7-07c23e127e81.jpg?v=1782227073"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information: Treatment Process: Mechanism Efficacy: become beautiful Color: 13x6 headgear Applicable facial type: any facial type Hair material: Human hair Applicable skin color: any skin color Color classification: 8 inches 150% density, 10 inches...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/brown-color-human-hair-wigs-human-hair-wig",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/brown-color-human-hair-wigs-human-hair-wig",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Color option"
+                ],
+                "visible": true,
+                "sortOrder": 6
+          },
+          {
+                "id": "shopify-8627428819140",
+                "sku": "SHOPIFY-8627428819140",
+                "zh": "Shopify 蕾丝真人发假发",
+                "en": "Front Lace Wig Human Hair Wig",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "12-30 inch",
+                "style": "lace front",
+                "price": "C$623.51-3273.99",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/9b73f3ac-870d-4cb6-be8a-a987675c10ed.jpg?v=1782227062",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/da55762d-be8a-4428-9177-fe832308c610.jpg?v=1782227062",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/62b006e0-5010-4f3f-977f-ec5b12667a86.jpg?v=1782227062",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/92a16df3-740b-4fef-92f2-fd29e1aaa7ce.jpg?v=1782227062",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/5eacd2bf-2a79-4c5a-a2ae-f34249f08c06.jpg?v=1782227062",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/27a23e0a-be37-4468-8da3-204e2654f000.jpg?v=1782227062",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/0cdadd95-152b-4c25-89f3-2c4b9076c5bf.jpg?v=1782227062",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/41c5ff9d-ab8a-4793-b769-077a5db078d5.jpg?v=1782227062",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/8e6bdbdb-d777-4e5a-9a12-20a82c29a161.jpg?v=1782227062",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/dd103e00-a8c4-4e53-bd9c-0f5a893dff25.jpg?v=1782227062"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information: Treatment Process: mechanical hand weaving Efficacy: changing hair style Color: 150 density 13*4,150 density 4*4,T lace Applicable face type: any face type Applicable people: Ladies Hair material: Human hair Applicable skin color: any s...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/front-lace-wig-human-hair-wig",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/front-lace-wig-human-hair-wig",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Lace front"
+                ],
+                "visible": true,
+                "sortOrder": 7
+          },
+          {
+                "id": "shopify-8627428163780",
+                "sku": "SHOPIFY-8627428163780",
+                "zh": "Shopify 蕾丝真人发假发",
+                "en": "Wig Human Hair Body Wave Lace Front Wigs Wholesale Glueless Hd Lace Frontal Wigs For Black Women",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "Multiple options",
+                "style": "body wave / lace front / glueless",
+                "price": "C$72.8",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/63e106b9-cc4c-4d0c-a423-a0e44e7cef7f.jpg?v=1782227049",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/17c17b44-f53c-4511-9544-9cd9ebf68420.jpg?v=1782227049",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/d4d01784-fdc9-4ddd-a0fe-c19e9eebb8c2.jpg?v=1782227049",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/310893a4-efd7-4f26-bc54-8fb34ae4618c.jpg?v=1782227049",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/3e248ffe-213e-4025-b680-375c4982a960.jpg?v=1782227049"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information : Size: 26*16 cm Place of origin：Henan, China Model number:Fuxin-46 Hair grade:Remy Hair Density:200% Cap Size:Average Size Suitable dying colors:ALL COLORS Color of Lace:Transparent, HD Lace material:Swiss Lace, glueless lace Shade:Natu...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/wig-human-hair-body-wave-lace-front-wigs-wholesale-glueless-hd-lace-frontal-wigs-for-black-women",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/wig-human-hair-body-wave-lace-front-wigs-wholesale-glueless-hd-lace-frontal-wigs-for-black-women",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Lace front",
+                      "Glueless",
+                      "Body wave"
+                ],
+                "visible": true,
+                "sortOrder": 8
+          },
+          {
+                "id": "shopify-8627427508420",
+                "sku": "SHOPIFY-8627427508420",
+                "zh": "Shopify 蕾丝真人发假发",
+                "en": "Human Hair Lace Front Wig Body Wave  Human Hair Lace Front Wig",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "10-24 inch",
+                "style": "body wave / lace front",
+                "price": "C$750.65-1630.62",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618800798286.jpg?v=1782227037",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618800798293.jpg?v=1782227036",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618800798294.jpg?v=1782227036",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618800798295.jpg?v=1782227037",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618800798296.jpg?v=1782227037"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information: Model: Body wave headgear Applicable people: Ms. Processing technology: Semi-mechanical semi-hand weaving Can it be dyed and ironed: It can be dyed Hair material: Real hair Applicable skin tone: Any skin tone Applicable face shape: Any...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/human-hair-lace-front-wig-body-wave-human-hair-lace-front-wig",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/human-hair-lace-front-wig-body-wave-human-hair-lace-front-wig",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Lace front",
+                      "Body wave"
+                ],
+                "visible": true,
+                "sortOrder": 9
+          },
+          {
+                "id": "shopify-8627426918596",
+                "sku": "SHOPIFY-8627426918596",
+                "zh": "Shopify 发束/closure 商品",
+                "en": "Brazilian Human Hair Bundles with closure",
+                "type": "Hair bundles / 发束套装",
+                "inch": "8-10 inch",
+                "style": "Shopify style",
+                "price": "C$408.92-501.09",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/23024792408269.jpg?v=1782227025",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/3583558432701.jpg?v=1782227025",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1956478112005.jpg?v=1782227025",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1728155859371.jpg?v=1782227025",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/35759323145.jpg?v=1782227025"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Material： Hair",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/brazilian-human-hair-bundles-with-closure",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/brazilian-human-hair-bundles-with-closure",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Bundles"
+                ],
+                "visible": true,
+                "sortOrder": 10
+          },
+          {
+                "id": "shopify-8627425476804",
+                "sku": "SHOPIFY-8627425476804",
+                "zh": "Shopify 发束/closure 商品",
+                "en": "Highlight bundles with closure straight brazilian human hair",
+                "type": "Hair bundles / 发束套装",
+                "inch": "8-30 inch",
+                "style": "straight / highlight",
+                "price": "C$64.89-180.97",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1617361529118.jpg?v=1782227015",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1617361529128.jpg?v=1782227016",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1617361529123.jpg?v=1782227015",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1617361529114.jpg?v=1782227016",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1617361529115.jpg?v=1782227015",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618059766880.jpg?v=1782227016",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618059766915.jpg?v=1782227016",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618059766910.jpg?v=1782227015",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618059766892.jpg?v=1782227015",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618059766898.jpg?v=1782227015",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618059766903.jpg?v=1782227016",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618059767173.jpg?v=1782227015",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618059767199.jpg?v=1782227016",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618059767197.jpg?v=1782227015"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information: Brand: HRS Brand Type: European and American brands Style: star fashion Model: Human Hair Weaves Applicable people: Ms. Treatment process: mechanism Wig length: long hair Can it be dyed hot: it can be dyed hot Hair material: real hair A...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/highlight-bundles-with-closure-straight-brazilian-human-hair",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/highlight-bundles-with-closure-straight-brazilian-human-hair",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Straight",
+                      "Bundles",
+                      "Color option"
+                ],
+                "visible": true,
+                "sortOrder": 11
+          },
+          {
+                "id": "shopify-8627423772868",
+                "sku": "SHOPIFY-8627423772868",
+                "zh": "Shopify 真人发假发商品",
+                "en": "Peruvian virgin hair body wave Peru real human hair hair hair",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "8-30 inch",
+                "style": "body wave",
+                "price": "C$90.89-475.5",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/46268078204304.jpg?v=1782226994",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/2607061674262.jpg?v=1782226995",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/6691901644885.jpg?v=1782226995",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/484321234997.jpg?v=1782226995",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/3635298495710.jpg?v=1782226994"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Real Hair Secret Hair [Color] natural color [Weight] 100 ± 5g / piece [Size] 8-30inch [Grade] 7A [Process] Double-layer woven hair curtain [Material] Real human hair, soft silk, no mess, washable, high temperature resistance, excellent quality Packing list:...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/peruvian-virgin-hair-body-wave-peru-real-human-hair-hair-hair",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/peruvian-virgin-hair-body-wave-peru-real-human-hair-hair-hair",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Body wave"
+                ],
+                "visible": true,
+                "sortOrder": 12
+          },
+          {
+                "id": "shopify-8627254984900",
+                "sku": "SHOPIFY-8627254984900",
+                "zh": "Shopify 真人发假发商品",
+                "en": "Human hair straight hair Brazilin human straight hair Brazil hot sale natural color",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "8-30 inch",
+                "style": "straight / natural color",
+                "price": "C$49-459",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/3726533000_1145601670.400x400.jpg?v=1782223770",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/702148010788.jpg?v=1782223771",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/643036883867.jpg?v=1782223770",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/3726533000_1145601670.jpg?v=1782223771"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "[product name] Brazil straight [material] human hair curtain doesn't fall off, doesn't knot, and feels soft [Specification] 8-30 inch [color] 1b natural color [weight] 100g ± 5g / piece Two layer mechanism [product function] it can be dyed and scalded",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/human-hair-straight-hair-brazilin-human-straight-hair-brazil-hot-sale-natural-color",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/human-hair-straight-hair-brazilin-human-straight-hair-brazil-hot-sale-natural-color",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Straight",
+                      "Color option"
+                ],
+                "visible": true,
+                "sortOrder": 13
+          },
+          {
+                "id": "shopify-8627229556932",
+                "sku": "SHOPIFY-8627229556932",
+                "zh": "Shopify 真人发假发商品",
+                "en": "Natural color wig, real wig, hair extension, Brazilian body wave hair wig",
+                "type": "Human hair wig / 真人发假发",
+                "inch": "8-26 inch",
+                "style": "body wave / natural color",
+                "price": "C$59-269",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1506321250944.jpg?v=1782223272",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/4991600931151.jpg?v=1782223272",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/549120064892.jpg?v=1782223271",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1268150212962.jpg?v=1782223271",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/141849106373.jpg?v=1782223272"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Style: exotic Applicable people: General Process: Mechanism Wig length: medium long hair Can be dyed hot: can be dyed Hair material: real hair Apply skin tone: any skin tone Applicable face: any face type Liu Hai type: can be slanted",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/natural-color-wig-real-wig-hair-extension-brazilian-body-wave-hair-wig",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/natural-color-wig-real-wig-hair-extension-brazilian-body-wave-hair-wig",
+                "tags": [
+                      "Shopify",
+                      "Human hair",
+                      "Body wave",
+                      "Color option"
+                ],
+                "visible": true,
+                "sortOrder": 14
+          },
+          {
+                "id": "shopify-8627213500612",
+                "sku": "SHOPIFY-8627213500612",
+                "zh": "Shopify 假发商品",
+                "en": "Long Hair Wigs European And American Ladies With Long Curly Hair",
+                "type": "Wig / 假发",
+                "inch": "Multiple options",
+                "style": "curly",
+                "price": "C$30-35",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618289776139.jpg?v=1782222993",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618289784649.jpg?v=1782222993",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618289788544.jpg?v=1782222993",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618365903946.jpg?v=1782222993",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618289795686.jpg?v=1782222992",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618289780861.jpg?v=1782222993",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/1618365898300.jpg?v=1782222993"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information Applicable people; ladies Treatment process; mechanism Can it be dyed hot; not hot dyed Hair material; high temperature wire Applicable skin tone; any skin tone Applicable face shape; any face shape Bangs type; long bangs Origin; Zhejian...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/long-hair-wigs-european-and-american-ladies-with-long-curly-hair",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/long-hair-wigs-european-and-american-ladies-with-long-curly-hair",
+                "tags": [
+                      "Shopify",
+                      "Curly"
+                ],
+                "visible": true,
+                "sortOrder": 15
+          },
+          {
+                "id": "shopify-8627189842116",
+                "sku": "SHOPIFY-8627189842116",
+                "zh": "Shopify 蕾丝真人发假发",
+                "en": "Body Wave Lace Front Wig For Black Women",
+                "type": "Wig / 假发",
+                "inch": "10-18 inch",
+                "style": "body wave / lace front",
+                "price": "C$145-235",
+                "cover": "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/d309f534-f954-4e10-a494-ac8e1f585c96.jpg?v=1782222537",
+                "images": [
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/939f9cdb-3aa0-49c6-8d17-686fd17dafcc.jpg?v=1782222537",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/5abff97b-d24d-49d9-85a7-d7fe8ec2ee4e.jpg?v=1782222537",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/f9b467f8-3f54-4c14-9248-f00e38ee926b.jpg?v=1782222537",
+                      "https://cdn.shopify.com/s/files/1/0746/5513/7988/files/36dc7a52-7932-4596-8b69-1de3e4a6b5de.jpg?v=1782222537"
+                ],
+                "videos": [],
+                "fit": "来自 cxywigs.com 的 Shopify 商品资料，适合线下面对面介绍时展示图片、价格区间和关键规格。",
+                "fitEn": "Product information: Applicable people: general Process: Mechanism Wig length: medium long hair Can it be dyed: can be dyed Hair material: real hair Applicable skin tone: any skin tone Applicable face shape: any face shape Type of bangs: can be neat or obli...",
+                "talk": "可打开 Shopify 商品页核对变体、库存和下单信息：https://cxywigs.com/products/body-wave-lace-front-wig-for-black-women",
+                "talkEn": "Imported from Shopify. Use this card to show product photos and the current Shopify price range; confirm exact variant, inventory, and checkout details on https://cxywigs.com/products/body-wave-lace-front-wig-for-black-women",
+                "tags": [
+                      "Shopify",
+                      "Lace front",
+                      "Body wave"
+                ],
+                "visible": true,
+                "sortOrder": 16
+          }
     ];
 
     let products = loadLocalProducts();
@@ -2160,6 +2575,10 @@
     }
 
     function normalizeProduct(product = {}) {
+      const shopifyUrl = product.shopifyUrl
+        || product.shopify_url
+        || String(product.talkEn || product.talk || "").match(/https:\/\/cxywigs\.com\/products\/[^\s，。)]+/)?.[0]
+        || "";
       return {
         id: product.id || product.sku || `product-${Date.now()}`,
         sku: product.sku || "",
@@ -2176,6 +2595,7 @@
         cover: product.cover || product.cover_url || product.coverUrl || "",
         images: normalizeList(product.images || product.image_urls || product.imageUrls),
         videos: normalizeList(product.videos || product.video_urls || product.videoUrls),
+        shopifyUrl,
         tags: normalizeList(product.tags),
         visible: product.visible ?? product.is_visible ?? true,
         sortOrder: Number(product.sortOrder ?? product.sort_order ?? 999)
@@ -2520,6 +2940,7 @@
             <li><span class="zh-secondary">${escapeHtml(product.talk)}</span></li>
           </ul>
           <div class="media-strip">
+            ${product.shopifyUrl ? `<a class="media-link" href="${escapeHtml(product.shopifyUrl)}" target="_blank" rel="noreferrer">Shopify Page</a>` : ""}
             ${(product.images || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Image ${index + 1}</a>`).join("")}
             ${(product.videos || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Video ${index + 1}</a>`).join("")}
           </div>
@@ -2566,6 +2987,7 @@
             </div>
           </div>
           <div class="media-strip">
+            ${product.shopifyUrl ? `<a class="media-link" href="${escapeHtml(product.shopifyUrl)}" target="_blank" rel="noreferrer">Shopify Page</a>` : ""}
             ${(product.images || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Image ${index + 1}</a>`).join("")}
             ${(product.videos || []).map((url, index) => `<a class="media-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Video ${index + 1}</a>`).join("")}
           </div>
